@@ -652,6 +652,52 @@
     color: var(--ink-faint);
   }
 
+  /* ---------- "יש אחות בליטל?" ---------- */
+  .cat-row { display: flex; align-items: flex-start; gap: 10px; }
+  .cat-col { flex: 1; min-width: 0; }
+
+  .nurse {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding-top: 2px;
+  }
+  .nurse svg { display: block; width: 46px; height: auto; flex: 0 0 auto; }
+  .steth-tube {
+    fill: none;
+    stroke: var(--teal);
+    stroke-width: 11;
+    stroke-linecap: round;
+  }
+  .steth-ear  { fill: var(--teal); stroke: var(--ink); stroke-width: 4; }
+  .steth-bell { fill: #CFC9BA; stroke: var(--ink); stroke-width: 5; }
+  .steth-dot  { fill: var(--teal); stroke: var(--ink); stroke-width: 4; animation: beat 1.5s ease-in-out infinite; transform-origin: 52px 146px; }
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    18%      { transform: scale(1.22); }
+    36%      { transform: scale(1); }
+    54%      { transform: scale(1.14); }
+  }
+  .steth-swing {
+    transform-origin: 80px 20px;
+    animation: swing 4.2s ease-in-out infinite;
+  }
+  @keyframes swing {
+    0%, 100% { transform: rotate(-2.5deg); }
+    50%      { transform: rotate(2.5deg); }
+  }
+  .nurse-text {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-family: var(--f-display);
+    font-size: .6rem;
+    line-height: 1.2;
+    color: var(--teal);
+  }
+  .nurse-text b { font-size: .78rem; font-weight: 400; }
+
   /* ---------- תת-קבוצה ---------- */
   .sub { margin-top: 16px; }
   .sub[hidden] { display: none; }
@@ -1143,7 +1189,8 @@
   }
   .pipe-text {
     position: absolute;
-    top: 52%;
+    top: 62.5%;                    /* מרכז גוף הצינור בתוך ה-viewBox */
+    transform: translateY(-50%);
     display: grid;
     place-items: center;
     text-align: center;
@@ -1238,10 +1285,10 @@
   /* ---------- "עדישי התרנגולה" ---------- */
   .rooster {
     position: relative;
-    margin: 26px auto 4px;
-    max-width: 300px;
+    flex: 0 0 136px;        /* תג לצד הכותרת, כמו הפירמידות ושק הכסף */
     display: grid;
     place-items: center;
+    margin-top: 2px;
   }
   .rooster svg { display: block; width: 100%; height: auto; }
   .rooster g, .rooster polygon, .rooster ellipse, .rooster circle { stroke: var(--ink); stroke-width: 5; }
@@ -1270,11 +1317,11 @@
     font-family: var(--f-display);
     color: #3A2208;
     line-height: 1;
-    transform: translate(6%, 3%) rotate(-4deg);
+    transform: translate(5px, 7px) rotate(-4deg);
     pointer-events: none;
   }
-  .rooster-text   { font-size: clamp(.95rem, 4.4vw, 1.2rem); }
-  .rooster-text b { font-size: clamp(1.25rem, 6vw, 1.7rem); font-weight: 400; }
+  .rooster-text   { font-size: .58rem; }
+  .rooster-text b { font-size: .78rem; font-weight: 400; }
 
   /* ---------- פיצוץ "אלחנן, סמאש!!!" ---------- */
   .smash {
@@ -1509,31 +1556,12 @@
 
   <!-- ========== רשימת ציוד ========== -->
   <section class="page" id="page-gear" hidden>
-    <p class="eyebrow"><span dir="ltr">DON'T PANIC</span></p>
-    <h1>רשימת ציוד</h1>
-    <p class="lede">קודם כל להיכנס ללינק למטה ולמלא מה אני מביא שהקאמפ צריך.</p>
-
-    <div id="gearLink"></div>
-
-    <div id="gearTips"></div>
-
-    <nav class="chips" id="catIndex" aria-label="קפיצה לקטגוריה"></nav>
-
-    <label class="optrow">
-      <input type="checkbox" id="optToggle">
-      <span class="switch"></span>
-      <span class="optlabel">הצג פריטים אופציונליים
-        <span id="optCount"></span>
-      </span>
-    </label>
-
-    <div class="meter-wrap">
-      <div class="meter-top">
-        <b>ארוז</b>
-        <span class="count"><span id="gearDone">0</span> / <span id="gearTotal">0</span></span>
+    <div class="money-head">
+      <div class="money-head-txt">
+        <p class="eyebrow"><span dir="ltr">DON'T PANIC</span></p>
+        <h1>רשימת ציוד</h1>
+        <p class="lede">קודם כל להיכנס ללינק למטה ולמלא מה אני מביא שהקאמפ צריך.</p>
       </div>
-      <div class="meter"><i id="gearBar"></i></div>
-    </div>
 
     <div class="rooster" aria-label="עדישי התרנגולה">
       <svg viewBox="0 0 330 265" role="img" aria-hidden="true">
@@ -1559,6 +1587,29 @@
         </g>
       </svg>
       <span class="rooster-text">עדישי<b>התרנגולה</b></span>
+    </div>
+    </div>
+
+    <div id="gearLink"></div>
+
+    <div id="gearTips"></div>
+
+    <nav class="chips" id="catIndex" aria-label="קפיצה לקטגוריה"></nav>
+
+    <label class="optrow">
+      <input type="checkbox" id="optToggle">
+      <span class="switch"></span>
+      <span class="optlabel">הצג פריטים אופציונליים
+        <span id="optCount"></span>
+      </span>
+    </label>
+
+    <div class="meter-wrap">
+      <div class="meter-top">
+        <b>ארוז</b>
+        <span class="count"><span id="gearDone">0</span> / <span id="gearTotal">0</span></span>
+      </div>
+      <div class="meter"><i id="gearBar"></i></div>
     </div>
 
     <div id="gearCats"></div>
@@ -1794,6 +1845,7 @@ const CONFIG = {
     {
       category: "תרופות",
       about: "לחירום ולנוחות יומיומית",
+      badge: "nurse",
       groups: [
         { sub: "בסיס", items: [
           "תרופות מרשם קבועות / שהשתמשתי בהן לאחרונה",
@@ -2276,6 +2328,23 @@ document.getElementById("nopeList").innerHTML = CONFIG.nope
   .map((t) => `<li>${esc(t)}</li>`)
   .join("");
 
+/* ---------- תגים מצוירים בכותרות קטגוריות ---------- */
+const BADGES = {
+  nurse: `<div class="nurse" aria-label="יש אחות בליטל?">
+    <svg viewBox="0 0 160 175" role="img" aria-hidden="true">
+      <g class="steth-swing">
+        <path class="steth-tube" d="M44,22 C38,62 58,82 80,95 C102,82 122,62 116,22"/>
+        <path class="steth-tube" d="M80,95 C83,120 72,134 58,140"/>
+        <circle class="steth-ear" cx="44" cy="18" r="9"/>
+        <circle class="steth-ear" cx="116" cy="18" r="9"/>
+        <circle class="steth-bell" cx="52" cy="146" r="24"/>
+        <circle class="steth-dot"  cx="52" cy="146" r="13"/>
+      </g>
+    </svg>
+    <span class="nurse-text">יש אחות<b>בליטל?</b></span>
+  </div>`
+};
+
 /* ---------- בניית רשימת הציוד ---------- */
 const norm = (it) => (typeof it === "string" ? { t: it, n: "", o: false } : { t: it.t, n: it.n || "", o: it.o === true });
 let countOptional = 0;
@@ -2304,12 +2373,19 @@ document.getElementById("gearCats").innerHTML = CONFIG.gear
       })
       .join("");
 
-    return `<section class="cat" id="cat-${ci}">
-      <div class="cat-head">
+    const head = `<div class="cat-head">
         <h2>${esc(cat.category)}</h2>
         <span class="of"></span>
       </div>
-      <p class="cat-about">${esc(cat.about)}</p>
+      <p class="cat-about">${esc(cat.about)}</p>`;
+
+    /* קטגוריה עם תג — הכותרת בעמודה אחת והתג לצידה */
+    const top = cat.badge && BADGES[cat.badge]
+      ? `<div class="cat-row"><div class="cat-col">${head}</div>${BADGES[cat.badge]}</div>`
+      : head;
+
+    return `<section class="cat" id="cat-${ci}">
+      ${top}
       ${tips}
       ${groups}
     </section>`;
