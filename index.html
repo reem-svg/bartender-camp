@@ -1086,7 +1086,8 @@
   .shifts li {
     display: grid;
     grid-template-columns: 6.9rem 1fr;  /* רחב מספיק ל"13:00–15:00" בשורה אחת */
-    gap: 4px 12px;
+    gap: 12px;
+    align-items: start;
     padding: 12px 14px;
   }
   .shifts li + li { border-top: 1px dotted var(--line); }
@@ -1102,11 +1103,18 @@
     border-left: 3px solid var(--mustard);
     padding-left: 10px;
   }
-  .role { font-weight: 700; }
+  /* כמה תפקידים באותה שעה יושבים זה לצד זה בשורה אחת */
+  .parts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+  }
+  .part { display: flex; flex-direction: column; }
+  .role { font-weight: 700; line-height: 1.3; }
   .who {
-    grid-column: 2;
     color: var(--ink-soft);
     font-size: .9rem;
+    line-height: 1.35;
   }
 
   footer {
@@ -1765,8 +1773,10 @@ const CONFIG = {
       note: "2.11 · פתיחת עיר",
       list: [
         { time: "13:00–15:00", role: "ניקיון קאמפ וקרח", who: "דן" },
-        { time: "17:00",       role: "מוביל ארוחה",      who: "עמית" },
-        { time: "17:00",       role: "סו שף",            who: "עדי" },
+        { time: "17:00", parts: [
+          { role: "מוביל ארוחה", who: "עמית" },
+          { role: "סו שף",       who: "עדי" }
+        ]},
         { time: "סוף הארוחה",  role: "ניקוי כלים",       who: "יסמין · עידו" },
         { time: "21:00–00:00", role: "בר",               who: "מי שרוצה" }
       ]
@@ -1776,8 +1786,10 @@ const CONFIG = {
       note: "3.11",
       list: [
         { time: "13:00–15:00", role: "ניקיון קאמפ וקרח", who: "עומר · אלחנן" },
-        { time: "17:00",       role: "מוביל ארוחה",      who: "בר" },
-        { time: "17:00",       role: "סו שף",            who: "תומר משולם · עידן" },
+        { time: "17:00", parts: [
+          { role: "מוביל ארוחה", who: "בר" },
+          { role: "סו שף",       who: "תומר משולם · עידן" }
+        ]},
         { time: "סוף הארוחה",  role: "ניקוי כלים",       who: "דניאל · טל" },
         { time: "21:00–00:00", role: "בר",               who: "ראם (אחראי) · ג׳זבי · מוטי · יוס" }
       ]
@@ -1787,8 +1799,10 @@ const CONFIG = {
       note: "4.11",
       list: [
         { time: "13:00–15:00", role: "ניקיון קאמפ וקרח", who: "עדישי · ליטל" },
-        { time: "17:00",       role: "מוביל ארוחה",      who: "ג׳זבי" },
-        { time: "17:00",       role: "סו שף",            who: "טל · יוס" },
+        { time: "17:00", parts: [
+          { role: "מוביל ארוחה", who: "ג׳זבי" },
+          { role: "סו שף",       who: "טל · יוס" }
+        ]},
         { time: "סוף הארוחה",  role: "ניקוי כלים",       who: "מוטי · יעל" },
         { time: "21:00–00:00", role: "בר",               who: "עמית (אחראי) · עומר · דניאל · ענבל" }
       ]
@@ -1798,8 +1812,10 @@ const CONFIG = {
       note: "5.11",
       list: [
         { time: "13:00–15:00", role: "ניקיון קאמפ וקרח", who: "תומר חדד · תומר משולם" },
-        { time: "17:00",       role: "מוביל ארוחה",      who: "ענבל" },
-        { time: "17:00",       role: "סו שף",            who: "מורי · חגי" },
+        { time: "17:00", parts: [
+          { role: "מוביל ארוחה", who: "ענבל" },
+          { role: "סו שף",       who: "מורי · חגי" }
+        ]},
         { time: "סוף הארוחה",  role: "ניקוי כלים",       who: "עדי · אלחנן" },
         { time: "21:00–00:00", role: "בר",               who: "יסמין (אחראי) · יעל · עידן · עדישי" }
       ]
@@ -1810,8 +1826,10 @@ const CONFIG = {
       list: [
         { time: "12:00–15:00", role: "בר — צהריים",      who: "ליטל (אחראי) · הדר · דן · ירדן" },
         { time: "13:00–15:00", role: "ניקיון קאמפ וקרח", who: "חגי · תומר חדד" },
-        { time: "17:00",       role: "מוביל ארוחה",      who: "עידו" },
-        { time: "17:00",       role: "סו שף",            who: "מורי · הדר" },
+        { time: "17:00", parts: [
+          { role: "מוביל ארוחה", who: "עידו" },
+          { role: "סו שף",       who: "מורי · הדר" }
+        ]},
         { time: "סוף הארוחה",  role: "ניקוי כלים",       who: "ירדן · בר" }
       ]
     }
@@ -2079,11 +2097,17 @@ document.getElementById("shiftNotes").innerHTML = (CONFIG.shiftNotes || [])
 document.getElementById("shiftDays").innerHTML = CONFIG.shifts
   .map((d) => {
     const rows = d.list
-      .map((s) => `<li>
+      .map((s) => {
+        /* שורה יכולה להחזיק כמה תפקידים באותה שעה (parts), או תפקיד יחיד */
+        const parts = s.parts || [{ role: s.role, who: s.who }];
+        const blocks = parts
+          .map((p) => `<span class="part"><span class="role">${esc(p.role)}</span><span class="who">${esc(p.who)}</span></span>`)
+          .join("");
+        return `<li>
         <span class="time">${esc(s.time)}</span>
-        <span class="role">${esc(s.role)}</span>
-        <span class="who">${esc(s.who)}</span>
-      </li>`)
+        <span class="parts">${blocks}</span>
+      </li>`;
+      })
       .join("");
     return `<section class="day">
       <div class="day-head"><b>${esc(d.day)}</b>${d.note ? `<small>${esc(d.note)}</small>` : ""}</div>
