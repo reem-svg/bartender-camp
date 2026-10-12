@@ -3,13 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ברטנדר</title>
+
+<!-- לא להופיע בחיפושי גוגל (אבל כן לאפשר תצוגה מקדימה בוואטסאפ) -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="אתר המידע של קאמפ ברטנדר — רשימת ציוד, משמרות, שקיפות כספית והזמנת אלכוהול.">
+
+<meta name="description" content="כל מה שצריך לדעת לפני שיוצאים — ציוד, משמרות, שקיפות והזמנת אלכוהול.">
 <meta name="theme-color" content="#B6442A">
+
+<!-- תצוגה מקדימה בוואטסאפ / טלגרם / פייסבוק -->
+<meta property="og:site_name" content="ברטנדר">
 <meta property="og:title" content="ברטנדר">
-<meta property="og:description" content="כל מה שצריך לדעת לפני שיוצאים.">
+<meta property="og:description" content="כל מה שצריך לדעת לפני שיוצאים — ציוד, משמרות, שקיפות והזמנת אלכוהול.">
 <meta property="og:type" content="website">
-<link rel="apple-touch-icon" href="map.png">
+<meta property="og:locale" content="he_IL">
+<meta property="og:url" content="https://reem-svg.github.io/bartender-camp/">
+<meta property="og:image" content="https://reem-svg.github.io/bartender-camp/og.png">
+<meta property="og:image:secure_url" content="https://reem-svg.github.io/bartender-camp/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ברטנדר — מדריך הקאמפ">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ברטנדר">
+<meta name="twitter:description" content="כל מה שצריך לדעת לפני שיוצאים.">
+<meta name="twitter:image" content="https://reem-svg.github.io/bartender-camp/og.png">
+
+<!-- אייקון לטאב ולמסך-הבית -->
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta name="apple-mobile-web-app-title" content="ברטנדר">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -1051,6 +1077,202 @@
     font-size: .88rem;
   }
 
+  /* ---------- "בחסות הצינור של מוטי" (בתפריט) ---------- */
+  .pipe {
+    position: relative;
+    margin: 30px 16px 0;
+    display: grid;
+    place-items: center;
+  }
+  .pipe svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .pipe-body { fill: #DCD6C6; stroke: var(--ink); stroke-width: 5; }
+  .pipe-cap  { fill: #BCB29C; stroke: var(--ink); stroke-width: 5; }
+  .pipe-hole { fill: #2B1D14; stroke: none; opacity: .55; }
+  .sprout path   { stroke: #2E7D3A; stroke-width: 5; stroke-linecap: round; fill: none; }
+  .sprout ellipse { fill: #3E9B49; stroke: var(--ink); stroke-width: 3.5; }
+  .pipe-sway {
+    transform-origin: 130px 60px;
+    animation: sway 4.5s ease-in-out infinite;
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-1.6deg); }
+    50%      { transform: rotate(1.6deg); }
+  }
+  .pipe-text {
+    position: absolute;
+    top: 52%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-family: var(--f-display);
+    font-size: .62rem;
+    line-height: 1.2;
+    color: #2B1D14;
+    pointer-events: none;
+  }
+  .pipe-text b { font-size: .82rem; font-weight: 400; }
+
+  /* ---------- "השדיים של ג׳זבי" ---------- */
+  .boobs {
+    position: relative;
+    margin: 34px auto 4px;
+    max-width: 290px;
+    display: grid;
+    place-items: center;
+  }
+  .boobs svg { display: block; width: 100%; height: auto; }
+  .b-shape {
+    fill: #E8927F;
+    stroke: var(--ink);
+    stroke-width: 6;
+  }
+  .b-shine { fill: rgba(255, 255, 255, .42); stroke: none; }
+  .b-bounce {
+    transform-origin: 170px 128px;
+    animation: jiggle 2.2s ease-in-out infinite;
+  }
+  @keyframes jiggle {
+    0%, 100% { transform: scaleY(1)    translateY(0); }
+    45%      { transform: scaleY(1.05) translateY(-5px); }
+    70%      { transform: scaleY(.97)  translateY(2px); }
+  }
+  .boobs-text {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    gap: 1px;
+    text-align: center;
+    font-family: var(--f-display);
+    color: #4A1B12;
+    line-height: 1;
+    transform: rotate(-3deg);
+    pointer-events: none;
+  }
+  .boobs-text   { font-size: clamp(.95rem, 4.6vw, 1.25rem); }
+  .boobs-text b { font-size: clamp(1.2rem, 5.8vw, 1.6rem); font-weight: 400; }
+
+  /* ---------- "עומר גונב אותנו" ---------- */
+  .money-head { display: flex; align-items: flex-start; gap: 12px; }
+  .money-head-txt { flex: 1; min-width: 0; }
+
+  .bag {
+    position: relative;
+    flex: 0 0 128px;
+    display: grid;
+    place-items: center;
+    margin-top: 2px;
+  }
+  .bag svg { display: block; width: 100%; height: auto; }
+  .bag path, .bag rect { stroke: var(--ink); stroke-width: 6; }
+  .bag-body { fill: #D9A84A; }
+  .bag-neck { fill: #C08E34; }
+  .bag-tie  { fill: var(--rust); }
+  .bag-shake {
+    transform-origin: 100px 190px;
+    animation: swipe 2.8s ease-in-out infinite;
+  }
+  @keyframes swipe {
+    0%, 60%, 100% { transform: rotate(0deg)    translateX(0); }
+    70%           { transform: rotate(-7deg)   translateX(4px); }
+    80%           { transform: rotate(6deg)    translateX(-4px); }
+    90%           { transform: rotate(-3deg)   translateX(2px); }
+  }
+  .bag-text {
+    position: absolute;
+    top: 52%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-family: var(--f-display);
+    font-size: .64rem;
+    line-height: 1.12;
+    color: #3A2208;
+    transform: rotate(-5deg);
+    pointer-events: none;
+  }
+  .bag-text b { font-size: .9rem; font-weight: 400; }
+
+  /* ---------- "עדישי התרנגולה" ---------- */
+  .rooster {
+    position: relative;
+    margin: 26px auto 4px;
+    max-width: 300px;
+    display: grid;
+    place-items: center;
+  }
+  .rooster svg { display: block; width: 100%; height: auto; }
+  .rooster g, .rooster polygon, .rooster ellipse, .rooster circle { stroke: var(--ink); stroke-width: 5; }
+  .r-red   { fill: #C8381F; }
+  .r-beak  { fill: var(--mustard); }
+  .r-head  { fill: #E9C46A; }
+  .r-eye-w { fill: #FBF3E2; }
+  .r-eye   { fill: var(--ink); stroke-width: 0; }
+
+  .r-wag {
+    transform-origin: 178px 150px;
+    animation: peck 3.4s ease-in-out infinite;
+  }
+  @keyframes peck {
+    0%, 72%, 100% { transform: rotate(0deg); }
+    80%           { transform: rotate(7deg); }
+    88%           { transform: rotate(-3deg); }
+  }
+
+  .rooster-text {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    gap: 1px;
+    text-align: center;
+    font-family: var(--f-display);
+    color: #3A2208;
+    line-height: 1;
+    transform: translate(6%, 3%) rotate(-4deg);
+    pointer-events: none;
+  }
+  .rooster-text   { font-size: clamp(.95rem, 4.4vw, 1.2rem); }
+  .rooster-text b { font-size: clamp(1.25rem, 6vw, 1.7rem); font-weight: 400; }
+
+  /* ---------- פיצוץ "אלחנן, סמאש!!!" ---------- */
+  .smash {
+    position: relative;
+    margin: 40px auto 8px;
+    max-width: 330px;
+    display: grid;
+    place-items: center;
+  }
+  .smash svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+  .burst-back {            /* עותק כהה מאחור — נותן קו-מתאר עבה בסגנון קומיקס */
+    fill: var(--ink);
+    transform-origin: 200px 150px;
+    transform: scale(1.07);
+  }
+  .burst {
+    fill: #35B44A;
+    transform-origin: 200px 150px;
+    animation: pop 1.6s ease-in-out infinite;
+  }
+  @keyframes pop {
+    0%, 100% { transform: scale(1)    rotate(0deg); }
+    50%      { transform: scale(1.04) rotate(-1.5deg); }
+  }
+
+  .smash-text {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    gap: 2px;
+    text-align: center;
+    font-family: var(--f-display);
+    color: #0E2E14;
+    line-height: 1;
+    transform: rotate(-7deg);
+    text-shadow: 2px 2px 0 rgba(255, 255, 255, .35);
+  }
+  .smash-text   { font-size: clamp(1.1rem, 5.2vw, 1.5rem); }
+  .smash-text b { font-size: clamp(1.7rem, 8.4vw, 2.5rem); font-weight: 400; }
+
   /* ---------- משמרות ---------- */
   .day { margin-top: 24px; }
   .day-head {
@@ -1161,6 +1383,32 @@
     <a href="#/booze"  data-route="booze">הזמנת אלכוהול בשבילנו<span class="tick"></span></a>
     <a href="#/money"  data-route="money">שקיפות<span class="tick"></span></a>
   </div>
+  <div class="pipe" aria-label="בחסות הצינור של מוטי">
+    <svg viewBox="0 0 260 120" role="img" aria-hidden="true">
+      <g class="pipe-sway">
+        <!-- נבטים -->
+        <g class="sprout">
+          <path d="M62,44 L62,20"/><ellipse cx="51" cy="18" rx="12" ry="7"/><ellipse cx="73" cy="12" rx="13" ry="7"/>
+        </g>
+        <g class="sprout">
+          <path d="M130,44 L130,14"/><ellipse cx="118" cy="13" rx="13" ry="7"/><ellipse cx="142" cy="7" rx="12" ry="7"/>
+        </g>
+        <g class="sprout">
+          <path d="M198,44 L198,22"/><ellipse cx="187" cy="20" rx="12" ry="7"/><ellipse cx="209" cy="14" rx="12" ry="7"/>
+        </g>
+      </g>
+      <!-- צינור -->
+      <rect class="pipe-body" x="8" y="44" width="244" height="62" rx="31"/>
+      <ellipse class="pipe-cap" cx="18" cy="75" rx="11" ry="31"/>
+      <ellipse class="pipe-cap" cx="242" cy="75" rx="11" ry="31"/>
+      <!-- חורים -->
+      <ellipse class="pipe-hole" cx="62"  cy="47" rx="15" ry="6"/>
+      <ellipse class="pipe-hole" cx="130" cy="47" rx="15" ry="6"/>
+      <ellipse class="pipe-hole" cx="198" cy="47" rx="15" ry="6"/>
+    </svg>
+    <span class="pipe-text">בחסות<b>הצינור של מוטי</b></span>
+  </div>
+
   <div class="drawer-foot">הסימונים ברשימת־הציוד נשמרים בטלפון שלך</div>
 </nav>
 
@@ -1202,6 +1450,18 @@
         <span>כמה נכנס, כמה יצא, ועל מה</span>
       </a>
     </div>
+
+    <div class="boobs" aria-label="השדיים של ג׳זבי">
+      <svg viewBox="0 0 340 230" role="img" aria-hidden="true">
+        <g class="b-bounce">
+          <circle class="b-shape" cx="110" cy="128" r="88"/>
+          <circle class="b-shape" cx="230" cy="128" r="88"/>
+          <circle class="b-shine" cx="78"  cy="92"  r="20"/>
+          <circle class="b-shine" cx="198" cy="92"  r="20"/>
+        </g>
+      </svg>
+      <span class="boobs-text">השדיים<b>של ג׳זבי</b></span>
+    </div>
   </section>
 
   <!-- ========== רשימת ציוד ========== -->
@@ -1232,6 +1492,32 @@
       <div class="meter"><i id="gearBar"></i></div>
     </div>
 
+    <div class="rooster" aria-label="עדישי התרנגולה">
+      <svg viewBox="0 0 330 265" role="img" aria-hidden="true">
+        <g class="r-wag">
+          <!-- כרבולת -->
+          <g class="r-red">
+            <circle cx="138" cy="58"  r="30"/>
+            <circle cx="180" cy="46"  r="34"/>
+            <circle cx="221" cy="60"  r="27"/>
+          </g>
+          <!-- זקן -->
+          <g class="r-red">
+            <circle cx="88"  cy="198" r="21"/>
+            <circle cx="108" cy="215" r="16"/>
+          </g>
+          <!-- מקור -->
+          <polygon class="r-beak" points="72,142 14,158 72,180"/>
+          <!-- ראש -->
+          <ellipse class="r-head" cx="178" cy="150" rx="108" ry="88"/>
+          <!-- עין -->
+          <circle class="r-eye-w" cx="120" cy="116" r="17"/>
+          <circle class="r-eye"   cx="116" cy="118" r="8"/>
+        </g>
+      </svg>
+      <span class="rooster-text">עדישי<b>התרנגולה</b></span>
+    </div>
+
     <div id="gearCats"></div>
 
     <button class="clear" id="clearBtn">נקה את כל הסימונים</button>
@@ -1257,9 +1543,24 @@
 
   <!-- ========== שקיפות ========== -->
   <section class="page" id="page-money" hidden>
-    <p class="eyebrow">הכסף של הקאמפ</p>
-    <h1>שקיפות</h1>
-    <p class="lede">כל שקל שנכנס וכל שקל שיצא, פתוח לכולם.</p>
+    <div class="money-head">
+      <div class="money-head-txt">
+        <p class="eyebrow">הכסף של הקאמפ</p>
+        <h1>שקיפות</h1>
+        <p class="lede">כל שקל שנכנס וכל שקל שיצא, פתוח לכולם.</p>
+      </div>
+
+      <div class="bag" aria-label="עומר גונב אותנו">
+        <svg viewBox="0 0 200 225" role="img" aria-hidden="true">
+          <g class="bag-shake">
+            <path class="bag-neck" d="M74,16 L126,16 L120,52 L80,52 Z"/>
+            <path class="bag-body" d="M80,58 C34,86 16,148 42,182 C64,211 136,211 158,182 C184,148 166,86 120,58 Z"/>
+            <rect class="bag-tie" x="64" y="44" width="72" height="18" rx="9"/>
+          </g>
+        </svg>
+        <span class="bag-text">עומר<b>גונב</b>אותנו</span>
+      </div>
+    </div>
 
     <p class="updated" id="moneyUpdated"></p>
 
@@ -1289,6 +1590,14 @@
     <div id="boozeLink"></div>
 
     <ol class="steps" id="boozeSteps"></ol>
+
+    <div class="smash" aria-label="אלחנן, סמאש!!!">
+      <svg viewBox="0 0 400 300" role="img" aria-hidden="true">
+        <polygon class="burst-back" points="200.0,47.1 213.9,86.1 243.8,47.9 239.7,93.1 282.1,64.4 265.1,102.6 306.2,91.6 283.9,118.8 324.5,119.4 291.9,139.4 331.5,150.0 286.7,160.0 331.0,182.2 288.3,182.8 307.1,208.9 263.5,196.3 283.1,236.6 245.8,215.6 243.4,251.1 214.5,216.6 200.0,261.7 186.4,212.7 155.0,254.7 158.8,209.0 121.9,231.3 137.6,195.5 90.2,210.4 111.8,182.8 73.1,181.2 105.8,160.9 58.4,150.0 109.0,139.5 66.9,117.3 122.2,121.1 93.8,91.6 136.7,103.8 116.3,62.9 157.8,89.6 158.0,52.2 185.1,81.3"/>
+        <polygon class="burst" points="200.0,47.1 213.9,86.1 243.8,47.9 239.7,93.1 282.1,64.4 265.1,102.6 306.2,91.6 283.9,118.8 324.5,119.4 291.9,139.4 331.5,150.0 286.7,160.0 331.0,182.2 288.3,182.8 307.1,208.9 263.5,196.3 283.1,236.6 245.8,215.6 243.4,251.1 214.5,216.6 200.0,261.7 186.4,212.7 155.0,254.7 158.8,209.0 121.9,231.3 137.6,195.5 90.2,210.4 111.8,182.8 73.1,181.2 105.8,160.9 58.4,150.0 109.0,139.5 66.9,117.3 122.2,121.1 93.8,91.6 136.7,103.8 116.3,62.9 157.8,89.6 158.0,52.2 185.1,81.3"/>
+      </svg>
+      <span class="smash-text">אלחנן,<b>סמאש!!!</b></span>
+    </div>
   </section>
 </main>
 
