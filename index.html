@@ -1248,6 +1248,8 @@
     <h1>משמרות</h1>
     <p class="lede">לוח המשמרות של ברטנדר, לפי יום.</p>
 
+    <div id="shiftsLink"></div>
+
     <div id="shiftNotes"></div>
 
     <div id="shiftDays"></div>
@@ -1747,6 +1749,12 @@ const CONFIG = {
      יום = { day, note, list: [{ time, role, who }] }
      שעות: ארוחה 17:00 · ניקוי כלים בסוף הארוחה · ניקיון קאמפ וקרח 13:00–15:00
            בר שני–חמישי 21:00–00:00 · בר שישי 12:00–15:00 */
+  /* קישור לטבלת המשמרות המקורית — בראש עמוד המשמרות */
+  shiftsLink: {
+    url: "https://docs.google.com/spreadsheets/d/1gUekk-0_KvXOvkvbAwa-yBhyBYO-FnM2OkTkO-NbX2U/edit?usp=sharing",
+    label: "לטבלת המשמרות המלאה"
+  },
+
   shiftNotes: [
     "ארוחה: ניקוי הכלים של הכנת הארוחה (כלים אישיים — כל אחד מנקה לעצמו), והשארת המטבח מסודר ונקי.",
     "ניקיון קאמפ וקרח: ריקון פחים, פריקה בתחנת מעבר, בדיקת ניקיון השירותים, נייר טואלט ואלכוג׳ל, סדר וניקיון במהלך היום."
@@ -2096,6 +2104,10 @@ document.getElementById("boozeSteps").innerHTML = B.steps
   .join("");
 
 /* ---------- בניית לוח המשמרות ---------- */
+document.getElementById("shiftsLink").innerHTML = (CONFIG.shiftsLink || {}).url
+  ? `<a class="biglink" href="${esc(CONFIG.shiftsLink.url)}" target="_blank" rel="noopener">${esc(CONFIG.shiftsLink.label)}<small>נפתח בטאב חדש</small></a>`
+  : "";
+
 document.getElementById("shiftNotes").innerHTML = (CONFIG.shiftNotes || [])
   .map((t) => `<p class="tip">${esc(t)}</p>`)
   .join("");
