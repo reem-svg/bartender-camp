@@ -1107,9 +1107,15 @@
   .parts {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 22px;
+    gap: 10px 0;
   }
   .part { display: flex; flex-direction: column; }
+  /* קו צהוב מפריד בין תפקידים באותה שעה — כמו הקו שליד השעה */
+  .part:not(:last-child) {
+    border-left: 3px solid var(--mustard);
+    padding-left: 16px;
+    margin-left: 16px;
+  }
   .role { font-weight: 700; line-height: 1.3; }
   .who {
     color: var(--ink-soft);
