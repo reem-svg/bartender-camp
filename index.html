@@ -1,0 +1,2165 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="אתר המידע של קאמפ ברטנדר — רשימת ציוד, משמרות, שקיפות כספית והזמנת אלכוהול.">
+<meta name="theme-color" content="#B6442A">
+<meta property="og:title" content="ברטנדר">
+<meta property="og:description" content="כל מה שצריך לדעת לפני שיוצאים.">
+<meta property="og:type" content="website">
+<link rel="apple-touch-icon" href="map.png">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>ברטנדר</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Suez+One&family=Heebo:wght@400;500;700;900&display=swap">
+
+<style>
+  /* ========== טוקנים: יום ========== */
+  :root {
+    --paper:      #F0E3C8;
+    --paper-2:    #E7D6B4;
+    --card:       #F8EFDC;
+    --ink:        #2B1D14;
+    --ink-soft:   #6A5440;
+    --ink-faint:  #9A866C;
+    --rust:       #B6442A;
+    --rust-ink:   #FBF3E2;
+    --mustard:    #D99B21;
+    --teal:       #1F6157;
+    --line:       #CDB692;
+    --stamp-bg:   #FBF3E2;
+    --gold-bar:   #B07A12;
+
+    --f-display: "Suez One", Georgia, "Times New Roman", serif;
+    --f-body:    "Heebo", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+    --r:   10px;
+    --bar: 56px;
+    --stick: 150px; /* גובה האזור הדביק — בשביל קפיצה לעוגן */
+  }
+
+  /* ========== טוקנים: לילה (מערכת-הפעלה כהה) ========== */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #241812;
+      --paper-2:    #2E2018;
+      --card:       #32241B;
+      --ink:        #F1E2C6;
+      --ink-soft:   #C3AC8C;
+      --ink-faint:  #917B61;
+      --rust:       #D9613F;
+      --rust-ink:   #241812;
+      --mustard:    #E8AE3A;
+      --teal:       #48A994;
+      --line:       #4B382A;
+      --stamp-bg:   #241812;
+      --gold-bar:   #E8AE3A;
+    }
+  }
+
+  /* ========== טוקנים: לילה (בחירה מפורשת) ========== */
+  :root[data-theme="dark"] {
+    --paper:      #241812;
+    --paper-2:    #2E2018;
+    --card:       #32241B;
+    --ink:        #F1E2C6;
+    --ink-soft:   #C3AC8C;
+    --ink-faint:  #917B61;
+    --rust:       #D9613F;
+    --rust-ink:   #241812;
+    --mustard:    #E8AE3A;
+    --teal:       #48A994;
+    --line:       #4B382A;
+    --stamp-bg:   #241812;
+    --gold-bar:   #E8AE3A;
+  }
+
+  /* overflow-x: clip חותך את התפריט הסגור שמחוץ למסך בלי ליצור גלילה לצדדים
+     (בניגוד ל-hidden, הוא לא שובר את הסרגל ה"דביק" למעלה) */
+  html { direction: rtl; overflow-x: clip; scroll-behavior: smooth; }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ---------- סרגל עליון: שלט-פח ---------- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--rust);
+    color: var(--rust-ink);
+    height: var(--bar);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
+    box-shadow: 0 2px 0 var(--ink);
+  }
+
+  .burger {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    gap: 5px;
+    background: none;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .burger span {
+    display: block;
+    width: 23px;
+    height: 3px;
+    background: var(--rust-ink);
+    border-radius: 2px;
+    transition: transform .22s ease, opacity .18s ease;
+  }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  .brand {
+    font-family: var(--f-display);
+    font-size: 1.22rem;
+    letter-spacing: .01em;
+    line-height: 1;
+    padding-top: 3px;
+  }
+
+  /* ---------- פס-פסים רטרו ---------- */
+  .stripes {
+    height: 7px;
+    display: flex;
+    position: sticky;
+    top: var(--bar);
+    z-index: 39;
+  }
+  .stripes i { flex: 1; }
+  .stripes i:nth-child(1) { background: var(--mustard); }
+  .stripes i:nth-child(2) { background: var(--teal); }
+  .stripes i:nth-child(3) { background: var(--ink); }
+
+  /* ---------- תפריט נשלף ---------- */
+  .scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 48;
+    background: rgba(20, 12, 8, .55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .22s ease;
+  }
+  .scrim.open { opacity: 1; pointer-events: auto; }
+
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 49;
+    width: min(80vw, 290px);
+    background: var(--paper-2);
+    border-left: 3px solid var(--ink);
+    transform: translateX(102%);
+    transition: transform .26s cubic-bezier(.3, .8, .3, 1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .drawer.open { transform: translateX(0); }
+
+  .drawer-head {
+    padding: 18px 18px 14px;
+    border-bottom: 2px dashed var(--line);
+  }
+  .drawer-head b {
+    font-family: var(--f-display);
+    font-size: 1.3rem;
+    font-weight: 400;
+    display: block;
+    line-height: 1.15;
+  }
+  .drawer-head small {
+    color: var(--ink-soft);
+    font-size: .82rem;
+    letter-spacing: .08em;
+  }
+
+  .nav { padding: 8px 0 18px; }
+  .nav a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 15px 18px;
+    font-family: var(--f-display);
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav a .tick {
+    width: 9px;
+    height: 20px;
+    border-radius: 2px;
+    background: transparent;
+  }
+  .nav a[aria-current="page"] { background: var(--card); color: var(--rust); }
+  .nav a[aria-current="page"] .tick { background: var(--rust); }
+
+  .drawer-foot {
+    margin-top: auto;
+    padding: 16px 18px 22px;
+    color: var(--ink-faint);
+    font-size: .78rem;
+    letter-spacing: .04em;
+  }
+
+  /* ---------- מעטפת תוכן ---------- */
+  main {
+    max-width: 34rem;
+    margin: 0 auto;
+    padding: 22px 16px 64px;
+  }
+
+  .page[hidden] { display: none !important; }
+
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 8vw, 2.5rem);
+    line-height: 1.1;
+    margin: 4px 0 6px;
+    text-wrap: balance;
+  }
+
+  .eyebrow {
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    color: var(--rust);
+    margin: 0;
+  }
+
+  .lede {
+    color: var(--ink-soft);
+    margin: 10px 0 0;
+    font-size: 1.02rem;
+  }
+
+  /* ---------- עובדות-מהירות ---------- */
+  .facts {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    overflow: hidden;
+    margin-top: 22px;
+  }
+  /* טור-תוויות ברוחב קבוע, כדי שהתאריכים יתיישרו זה מתחת לזה
+     גם כשהתוויות באורכים שונים ("הקמות" מול "פתיחת עיר") */
+  .facts div {
+    background: var(--card);
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .facts dt {
+    margin: 0;
+    font-size: .78rem;
+    letter-spacing: .1em;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+  .facts dd {
+    margin: 0;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  /* ---------- כרטיס "איפה אנחנו" + מפה ---------- */
+  .where {
+    margin-top: 22px;
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    background: var(--card);
+    box-shadow: 4px 4px 0 var(--ink);
+    overflow: hidden;
+  }
+  .where-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    padding: 13px 15px 11px;
+  }
+  .where-q {
+    margin: 0;
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 1.15rem;
+  }
+  .where-a {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--rust);
+  }
+  .map-btn {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-top: 2px solid var(--ink);
+    background: #fff;
+    cursor: zoom-in;
+    position: relative;
+  }
+  .map-btn img {
+    display: block;
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    object-position: 70% 34%;
+  }
+  .map-hint {
+    position: absolute;
+    bottom: 9px;
+    left: 9px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+  .map-btn:focus-visible { outline: 3px solid var(--mustard); outline-offset: -3px; }
+
+  /* ---------- מפה במסך מלא ---------- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(20, 12, 8, .94);
+    display: flex;
+    flex-direction: column;
+  }
+  .lightbox[hidden] { display: none; }
+  .lb-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 13px;
+    color: #F1E2C6;
+  }
+  .lb-bar b {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 1.05rem;
+  }
+  .lb-bar small { display: block; font-size: .75rem; opacity: .7; }
+  .lb-close {
+    flex: 0 0 auto;
+    width: 42px;
+    height: 42px;
+    border: 2px solid #F1E2C6;
+    border-radius: 8px;
+    background: none;
+    color: #F1E2C6;
+    font-size: 1.15rem;
+    cursor: pointer;
+  }
+  .lb-scroll {
+    flex: 1;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+  }
+  .lb-inner { position: relative; width: max-content; }
+  .lb-inner img { display: block; max-width: none; height: auto; }
+  .lb-pin { position: absolute; left: 66.6%; top: 33.2%; width: 2px; height: 2px; }
+  .lb-tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 13px 10px;
+  }
+  .lb-tools button, .lb-tools a {
+    height: 38px;
+    min-width: 42px;
+    padding: 0 12px;
+    border: 2px solid #F1E2C6;
+    border-radius: 8px;
+    background: none;
+    color: #F1E2C6;
+    font: 700 1rem var(--f-body);
+    text-decoration: none;
+    display: inline-grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .lb-tools a { margin-inline-start: auto; font-size: .82rem; font-weight: 500; }
+  .lb-tools button:disabled { opacity: .35; cursor: default; }
+
+  /* ---------- כפתורי-ניווט גדולים בדף הבית ---------- */
+  .jump { display: grid; gap: 12px; margin-top: 22px; }
+  .jump a {
+    display: block;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    box-shadow: 4px 4px 0 var(--ink);
+    padding: 16px 16px 14px;
+    transition: transform .14s ease, box-shadow .14s ease;
+  }
+  .jump a:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .jump a span {
+    display: block;
+    color: var(--ink-soft);
+    font-size: .9rem;
+    margin-top: 2px;
+  }
+  .jump a strong {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 1.3rem;
+  }
+
+  /* ---------- הערת תוכן-דוגמה ---------- */
+  .sample {
+    display: block;
+    background: var(--stamp-bg);
+    border: 2px dashed var(--mustard);
+    border-radius: var(--r);
+    padding: 11px 13px;
+    font-size: .86rem;
+    color: var(--ink-soft);
+    margin: 16px 0 0;
+  }
+  .sample b { color: var(--ink); }
+
+  /* ---------- עצות ---------- */
+  .tip {
+    border-right: 4px solid var(--mustard);
+    background: var(--paper-2);
+    padding: 9px 12px;
+    font-size: .87rem;
+    color: var(--ink-soft);
+    border-radius: 0 var(--r) var(--r) 0;
+    margin: 10px 0 0;
+  }
+
+  /* ---------- אינדקס קטגוריות ---------- */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 18px;
+  }
+  .chips a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: .85rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--card);
+  }
+  .chips a[hidden] { display: none; }
+  .chips a em {
+    font-style: normal;
+    font-size: .76rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    direction: ltr;
+  }
+
+  /* ---------- מתג פריטים אופציונליים ---------- */
+  .optrow {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-top: 16px;
+    padding: 12px 14px;
+    border: 2px solid var(--line);
+    border-radius: var(--r);
+    background: var(--card);
+    cursor: pointer;
+  }
+  .optrow input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .switch {
+    flex: 0 0 auto;
+    width: 46px;
+    height: 26px;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    background: var(--paper-2);
+    position: relative;
+    transition: background-color .18s ease;
+  }
+  .switch::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--ink);
+    transition: transform .18s ease;
+  }
+  .optrow input:checked + .switch { background: var(--mustard); }
+  .optrow input:checked + .switch::after { transform: translateX(-20px); }
+  .optrow input:focus-visible + .switch { outline: 3px solid var(--rust); outline-offset: 2px; }
+  .optrow .optlabel { font-size: .92rem; font-weight: 500; }
+  .optrow .optlabel span {
+    display: block;
+    font-size: .78rem;
+    font-weight: 400;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- מודד-התקדמות ---------- */
+  .meter-wrap {
+    position: sticky;
+    top: calc(var(--bar) + 7px);
+    z-index: 30;
+    background: var(--paper);
+    padding: 12px 0 10px;
+    margin-top: 18px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .meter-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 7px;
+  }
+  .meter-top b {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 1.05rem;
+  }
+  .count {
+    direction: ltr; /* כדי ש"0 / 95" לא יתהפך בעברית */
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--rust);
+  }
+  .meter {
+    height: 16px;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    background: var(--paper-2);
+    overflow: hidden;
+  }
+  .meter i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: repeating-linear-gradient(-45deg, var(--teal) 0 7px, var(--ink) 7px 14px);
+    transition: width .3s ease;
+  }
+
+  /* ---------- קטגוריה ---------- */
+  .cat { margin-top: 34px; scroll-margin-top: var(--stick); }
+  .cat[hidden] { display: none; }
+  .cat-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 5px;
+  }
+  .cat-head h2 {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 1.42rem;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .cat-head .of {
+    font-size: .8rem;
+    color: var(--rust);
+    font-weight: 700;
+    direction: ltr;
+    font-variant-numeric: tabular-nums;
+  }
+  .cat-about {
+    margin: 6px 0 0;
+    font-size: .83rem;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- תת-קבוצה ---------- */
+  .sub { margin-top: 16px; }
+  .sub[hidden] { display: none; }
+  .sub-label {
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    color: var(--teal);
+    margin: 0 0 6px;
+  }
+
+  .items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    background: var(--card);
+    overflow: hidden;
+  }
+  .items li[hidden] { display: none; }
+  .items li + li:not([hidden]) { border-top: 1px solid var(--line); }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .item input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+  .stamp {
+    flex: 0 0 auto;
+    width: 27px;
+    height: 27px;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    background: var(--stamp-bg);
+    display: grid;
+    place-items: center;
+    transition: transform .16s ease, background-color .16s ease;
+  }
+  .stamp svg {
+    width: 19px;
+    height: 19px;
+    opacity: 0;
+    transform: scale(.4) rotate(-14deg);
+    transition: opacity .14s ease, transform .18s cubic-bezier(.2, 1.5, .4, 1);
+  }
+  .item-text { flex: 1; }
+  .item-note {
+    display: block;
+    font-size: .8rem;
+    line-height: 1.45;
+    color: var(--ink-faint);
+    margin-top: 1px;
+  }
+  .opt-tag {
+    display: inline-block;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--mustard);
+    border: 1.5px solid var(--mustard);
+    border-radius: 4px;
+    padding: 0 5px;
+    margin-inline-start: 6px;
+    vertical-align: 2px;
+  }
+
+  .item input:checked + .stamp {
+    background: var(--teal);
+    border-color: var(--teal);
+    transform: rotate(-5deg);
+  }
+  .item input:checked + .stamp svg {
+    opacity: 1;
+    transform: scale(1) rotate(-6deg);
+  }
+  .item:has(input:checked) .item-text {
+    color: var(--ink-faint);
+    text-decoration: line-through;
+    text-decoration-color: var(--ink-faint);
+    text-decoration-thickness: 1.5px;
+  }
+  .item:has(input:checked) .item-note { text-decoration: none; }
+  .item input:focus-visible + .stamp {
+    outline: 3px solid var(--mustard);
+    outline-offset: 2px;
+  }
+
+  .clear {
+    display: block;
+    width: 100%;
+    margin-top: 28px;
+    padding: 13px;
+    font-family: var(--f-body);
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--rust);
+    background: none;
+    border: 2px solid var(--rust);
+    border-radius: var(--r);
+    cursor: pointer;
+  }
+  .clear:active { background: var(--rust); color: var(--rust-ink); }
+
+  /* ---------- לא להביא ---------- */
+  .nope {
+    margin-top: 34px;
+    border: 2px solid var(--rust);
+    border-radius: var(--r);
+    overflow: hidden;
+  }
+  .nope h2 {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 1.15rem;
+    margin: 0;
+    padding: 10px 14px;
+    background: var(--rust);
+    color: var(--rust-ink);
+  }
+  .nope ul {
+    list-style: none;
+    margin: 0;
+    padding: 6px 14px 14px;
+    background: var(--card);
+  }
+  .nope li {
+    display: flex;
+    gap: 9px;
+    padding: 7px 0;
+    font-size: .92rem;
+    border-bottom: 1px dotted var(--line);
+  }
+  .nope li:last-child { border-bottom: 0; }
+  .nope li::before {
+    content: "✕";
+    color: var(--rust);
+    font-weight: 700;
+    flex: 0 0 auto;
+  }
+
+  /* ---------- שקיפות: אריחי-סיכום ---------- */
+  .updated {
+    margin: 14px 0 0;
+    font-size: .78rem;
+    letter-spacing: .06em;
+    color: var(--ink-faint);
+  }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .tile {
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    background: var(--card);
+    padding: 13px 14px 12px;
+  }
+  .tile.wide { grid-column: 1 / -1; }
+  .tile dt {
+    margin: 0;
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--ink-faint);
+  }
+  /* מספר-גיבור: אותו סאנס כמו הטקסט, וספרות פרופורציונליות (לא טבלאיות) */
+  .tile dd {
+    margin: 3px 0 0;
+    font-family: var(--f-body);
+    font-weight: 900;
+    font-size: 1.62rem;
+    line-height: 1.1;
+    letter-spacing: -.01em;
+  }
+  .tile.inc dd { color: var(--teal); }
+  .tile.out dd { color: var(--ink); }
+  .tile.bal dd { font-size: 1.95rem; }
+  .tile.bal.plus  dd { color: var(--teal); }
+  .tile.bal.minus dd { color: var(--rust); }
+  .tile .state {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+    padding: 1px 9px;
+  }
+  .tile.bal.plus  .state { color: var(--teal); }
+  .tile.bal.minus .state { color: var(--rust); }
+
+  /* ---------- שקיפות: כותרת-מקטע ---------- */
+  .mhead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 5px;
+    margin-top: 32px;
+  }
+  .mhead h2 {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin: 0;
+  }
+  .mhead .sum {
+    font-weight: 700;
+    font-size: .9rem;
+    color: var(--rust);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- שקיפות: עמודות הוצאה ---------- */
+  .bars { margin-top: 14px; display: grid; gap: 13px; }
+  .brow-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+  .brow-label { font-weight: 500; }
+  /* שני תאים נפרדים, כדי שסימן השקל לא ייצמד לאחוז */
+  .brow-val {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 9px;
+    font-variant-numeric: tabular-nums;
+  }
+  .brow-val b { font-weight: 700; }
+  .brow-val em {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--ink-faint);
+    font-size: .82rem;
+  }
+  .btrack {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--paper-2);
+    overflow: hidden;
+  }
+  .btrack i {
+    display: block;
+    height: 100%;
+    background: var(--gold-bar);
+    border-radius: 4px 0 0 4px; /* קצה-הנתון מעוגל, קצה-המוצא ישר */
+  }
+
+  /* ---------- שקיפות: שורות הכנסה ---------- */
+  .rows {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    background: var(--card);
+    overflow: hidden;
+  }
+  .rows li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+  .rows li + li { border-top: 1px solid var(--line); }
+  .rows b { font-weight: 500; }
+  .rows span {
+    flex: 0 0 auto;
+    font-weight: 700;
+    color: var(--teal);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- שקיפות: יומן הוצאות ---------- */
+  .log {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    background: var(--card);
+    overflow: hidden;
+  }
+  .log li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 12px;
+    padding: 12px 14px;
+  }
+  .log li + li { border-top: 1px dotted var(--line); }
+  .log .what { font-weight: 700; }
+  .log .amt {
+    grid-row: 1 / 3;
+    grid-column: 2;
+    align-self: center;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .log .meta {
+    font-size: .8rem;
+    color: var(--ink-faint);
+  }
+  .log .meta i {
+    font-style: normal;
+    color: var(--gold-bar);
+    font-weight: 500;
+  }
+
+  .subnote {
+    margin: 8px 0 0;
+    font-size: .83rem;
+    color: var(--ink-faint);
+  }
+
+  .tile .per {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--f-body);
+    font-size: .8rem;
+    font-weight: 500;
+    color: var(--ink-faint);
+  }
+
+  .empty {
+    margin-top: 14px;
+    padding: 16px 14px;
+    border: 2px dashed var(--line);
+    border-radius: var(--r);
+    color: var(--ink-faint);
+    font-size: .9rem;
+    text-align: center;
+  }
+
+  /* ---------- אלכוהול: תאריך-יעד ---------- */
+  .deadline {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    margin: 16px 0 0;
+    padding: 12px 15px;
+    background: var(--rust);
+    color: var(--rust-ink);
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    box-shadow: 4px 4px 0 var(--ink);
+    font-family: var(--f-display);
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  .biglink {
+    display: block;
+    margin-top: 20px;
+    padding: 17px 16px;
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--f-display);
+    font-size: 1.22rem;
+    color: var(--ink);
+    background: var(--mustard);
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform .14s ease, box-shadow .14s ease;
+  }
+  .biglink:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .biglink small {
+    display: block;
+    font-family: var(--f-body);
+    font-size: .8rem;
+    font-weight: 500;
+    opacity: .75;
+    margin-top: 2px;
+  }
+
+  .steps {
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+    display: grid;
+    gap: 12px;
+  }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step);
+    flex: 0 0 auto;
+    width: 27px;
+    height: 27px;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--card);
+    font-weight: 700;
+    font-size: .88rem;
+  }
+
+  /* ---------- משמרות ---------- */
+  .day { margin-top: 24px; }
+  .day-head {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--r) var(--r) 0 0;
+    padding: 9px 14px;
+  }
+  .day-head b {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 1.1rem;
+  }
+  .day-head small {
+    color: var(--ink-faint);
+    letter-spacing: .06em;
+    font-size: .8rem;
+  }
+
+  .shifts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 2px solid var(--ink);
+    border-top: 0;
+    border-radius: 0 0 var(--r) var(--r);
+    background: var(--card);
+    overflow: hidden;
+  }
+  .shifts li {
+    display: grid;
+    grid-template-columns: 5.6rem 1fr;
+    gap: 4px 13px;
+    padding: 12px 14px;
+  }
+  .shifts li + li { border-top: 1px dotted var(--line); }
+
+  .time {
+    direction: ltr;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    font-size: .95rem;
+    color: var(--rust);
+    border-left: 3px solid var(--mustard);
+    padding-left: 10px;
+  }
+  .role { font-weight: 700; }
+  .who {
+    grid-column: 2;
+    color: var(--ink-soft);
+    font-size: .9rem;
+  }
+
+  footer {
+    max-width: 34rem;
+    margin: 0 auto;
+    padding: 0 16px 44px;
+    color: var(--ink-faint);
+    font-size: .78rem;
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="פתיחת תפריט" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="brand" id="brandName">ברטנדר</div>
+</header>
+<div class="stripes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="scrim" id="scrim"></div>
+
+<nav class="drawer" id="drawer" aria-label="תפריט ראשי">
+  <div class="drawer-head">
+    <b id="drawerName">ברטנדר</b>
+    <small id="drawerDates">תאריכים יתווספו</small>
+  </div>
+  <div class="nav">
+    <a href="#/home"   data-route="home">דף הבית<span class="tick"></span></a>
+    <a href="#/gear"   data-route="gear">רשימת ציוד<span class="tick"></span></a>
+    <a href="#/shifts" data-route="shifts">משמרות<span class="tick"></span></a>
+    <a href="#/booze"  data-route="booze">הזמנת אלכוהול בשבילנו<span class="tick"></span></a>
+    <a href="#/money"  data-route="money">שקיפות<span class="tick"></span></a>
+  </div>
+  <div class="drawer-foot">הסימונים ברשימת־הציוד נשמרים בטלפון שלך</div>
+</nav>
+
+<main>
+  <!-- ========== דף הבית ========== -->
+  <section class="page" id="page-home">
+    <p class="eyebrow">ברוכים הבאים</p>
+    <h1 id="homeTitle">ברטנדר</h1>
+    <p class="lede" id="homeLede"></p>
+
+    <dl class="facts" id="homeFacts"></dl>
+
+    <section class="where">
+      <div class="where-top">
+        <p class="where-q" id="whereQ"></p>
+        <p class="where-a" id="whereA"></p>
+      </div>
+      <button type="button" class="map-btn" id="mapBtn">
+        <img src="map.png" alt="מפת הפסטיבל — מיקום הקאמפ מסומן בעיגול צהוב">
+        <span class="map-hint">למפה המלאה ⤢</span>
+      </button>
+    </section>
+
+    <div class="jump">
+      <a href="#/gear">
+        <strong>רשימת ציוד</strong>
+        <span>מה להביא — עם צ׳קבוקס לכל פריט</span>
+      </a>
+      <a href="#/shifts">
+        <strong>משמרות</strong>
+        <span>מי עובד, מתי ובאיזה תפקיד</span>
+      </a>
+      <a href="#/booze">
+        <strong>הזמנת אלכוהול בשבילנו</strong>
+        <span id="homeBoozeSub"></span>
+      </a>
+      <a href="#/money">
+        <strong>שקיפות</strong>
+        <span>כמה נכנס, כמה יצא, ועל מה</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== רשימת ציוד ========== -->
+  <section class="page" id="page-gear" hidden>
+    <p class="eyebrow"><span dir="ltr">DON'T PANIC</span></p>
+    <h1>רשימת ציוד</h1>
+    <p class="lede">קודם כל להיכנס ללינק למטה ולמלא מה אני מביא שהקאמפ צריך.</p>
+
+    <div id="gearLink"></div>
+
+    <div id="gearTips"></div>
+
+    <nav class="chips" id="catIndex" aria-label="קפיצה לקטגוריה"></nav>
+
+    <label class="optrow">
+      <input type="checkbox" id="optToggle">
+      <span class="switch"></span>
+      <span class="optlabel">הצג פריטים אופציונליים
+        <span id="optCount"></span>
+      </span>
+    </label>
+
+    <div class="meter-wrap">
+      <div class="meter-top">
+        <b>ארוז</b>
+        <span class="count"><span id="gearDone">0</span> / <span id="gearTotal">0</span></span>
+      </div>
+      <div class="meter"><i id="gearBar"></i></div>
+    </div>
+
+    <div id="gearCats"></div>
+
+    <button class="clear" id="clearBtn">נקה את כל הסימונים</button>
+
+    <section class="nope">
+      <h2 id="nopeTitle">לא להביא</h2>
+      <ul id="nopeList"></ul>
+    </section>
+  </section>
+
+  <!-- ========== משמרות ========== -->
+  <section class="page" id="page-shifts" hidden>
+    <p class="eyebrow">לוח־זמנים</p>
+    <h1>משמרות</h1>
+    <p class="lede">לוח המשמרות של ברטנדר, לפי יום.</p>
+
+    <p class="sample"><b>תוכן לדוגמה.</b> הלוח האמיתי יחליף אותו.</p>
+
+    <div id="shiftDays"></div>
+  </section>
+
+  <!-- ========== שקיפות ========== -->
+  <section class="page" id="page-money" hidden>
+    <p class="eyebrow">הכסף של הקאמפ</p>
+    <h1>שקיפות</h1>
+    <p class="lede">כל שקל שנכנס וכל שקל שיצא, פתוח לכולם.</p>
+
+    <p class="updated" id="moneyUpdated"></p>
+
+    <dl class="tiles" id="moneyTiles"></dl>
+
+    <div class="mhead"><h2>מאיפה נכנס</h2><span class="sum" id="incomeSum"></span></div>
+    <ul class="rows" id="incomeRows"></ul>
+
+    <div class="mhead"><h2>התקציב</h2><span class="sum" id="spendSum"></span></div>
+    <p class="subnote">מה מתוכנן להוציא על כל סעיף. ממוין מהגדול לקטן.</p>
+    <div class="bars" id="spendBars"></div>
+
+    <div class="mhead"><h2>הוצאות בפועל</h2><span class="sum" id="logCount"></span></div>
+    <p class="subnote">כסף שכבר שולם. מתעדכן תוך כדי.</p>
+    <ul class="log" id="spendLog"></ul>
+  </section>
+
+  <!-- ========== אלכוהול ========== -->
+  <section class="page" id="page-booze" hidden>
+    <p class="eyebrow">התארגנות קבוצתית</p>
+    <h1>הזמנת אלכוהול בשבילנו</h1>
+
+    <p class="deadline" id="boozeDeadline"></p>
+
+    <p class="lede" id="boozeLede"></p>
+
+    <div id="boozeLink"></div>
+
+    <ol class="steps" id="boozeSteps"></ol>
+  </section>
+</main>
+
+<footer id="footNote"></footer>
+
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lb-bar">
+    <b id="lbTitle">מפת העיר המלאה<small>הקאמפ מסומן בעיגול הצהוב · עדכון 08.10.2026</small></b>
+    <button type="button" class="lb-close" id="lbClose" aria-label="סגירת המפה">✕</button>
+  </div>
+  <div class="lb-tools">
+    <button type="button" id="zoomIn" aria-label="הגדלה">+</button>
+    <button type="button" id="zoomOut" aria-label="הקטנה">−</button>
+    <button type="button" id="zoomAll">כל המפה</button>  </div>
+  <div class="lb-scroll" id="lbScroll" dir="ltr">
+    <div class="lb-inner">
+      <img id="lbImg" src="map-full.png" width="9449" height="4252" alt="מפת העיר המלאה — מיקום הקאמפ מסומן בעיגול צהוב">
+      <span class="lb-pin" id="lbPin"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   כאן עורכים את התוכן — ורק כאן.
+   כל מה שמתחת לאזור הזה הוא המנגנון, אין צורך לגעת בו.
+
+   פריט ברשימת הציוד = מחרוזת, או אובייקט:
+     { t: "שם הפריט", o: true }
+     o: true  =  פריט אופציונלי (מוסתר עד שלוחצים על המתג)
+   ========================================================================== */
+const CONFIG = {
+  /* --- פרטי הקאמפ --- */
+  campName: "ברטנדר",
+  dates:    "29.10 – 7.11",
+  welcome:  "כל מה שצריך לדעת לפני שיוצאים — רשימת הציוד האישית שלכם ולוח המשמרות. הדף בנוי לטלפון, אפשר לשמור אותו למסך הבית.",
+
+  facts: [
+    { label: "הקמות",     value: "29.10" },
+    { label: "פתיחת עיר", value: "2.11" },
+    { label: "פירוקים",   value: "7.11" }
+  ],
+
+  /* הכיתוב מעל המפה בדף הבית */
+  where: { q: "איפה אנחנו?", a: "רחוב גליצ׳ 5.5" },
+
+  /* קישור לטבלת ציוד הקאמפ המשותפת — בראש דף הציוד */
+  gearLink: {
+    url: "https://docs.google.com/spreadsheets/d/1FpWpEMB6iy0F1xtdumgng0yTzOtz-kRQo20AJGS0FrI/edit?usp=sharing",
+    label: "למלא את טבלת ציוד קאמפ"
+  },
+
+  /* עצות כלליות שמופיעות בראש דף הציוד */
+  gearTips: [
+    "כל דבר שאתם מביאים — אתם גם מחזירים. קחו שקיות ואריזות אטומות לזבל, והורידו אריזות מיותרות כבר בבית."
+  ],
+
+  /* --- רשימת הציוד --- */
+  gear: [
+    {
+      category: "דיפולט",
+      about: "שאריות מהעולם ההוא",
+      groups: [
+        { sub: "", items: [
+          { t: "כרטיס למידברן" },
+          "תעודת זהות / רישיון נהיגה",
+          { t: "כסף לקניית קרח", o: true }
+        ]},
+        { sub: "מכונית", items: [
+          { t: "מפתחות למכונית" },
+          { t: "גגון + ראטצ׳טים", o: true },
+          "גלגל ספייר תקין",
+          "דלק, מים, שמן, פילטר אוויר",
+        ]}
+      ]
+    },
+    {
+      category: "בייסיק",
+      about: "דברים שעליך רוב הזמן",
+      groups: [
+        { sub: "", items: [
+          { t: "תיק גב / חגורת כיסים" },
+          { t: "שאקלים" },
+          "משקפי ראייה/שמש + ספייר + נרתיק / עדשות מגע + תמיסה",
+          "פנס",
+          "(לאבק) גוגלס, בנדנה / מסכת אבק",
+          { t: "(למעשנים) מאפרה + מצית" },
+          { t: "מתנות" },
+          { t: "מפה", o: true }
+        ]},
+        { sub: "לאכול ולשתות", items: [
+          { t: "כוס אישית" },
+          { t: "בקבוק מים רב־פעמי / שלוקר" },
+          "סכו״ם",
+          { t: "שקית לסכו״ם (נגד לכלוך)", o: true },
+          "קערה / צלחת פלסטיק",
+          { t: "סקוץ׳ / משהו לנקות את הקערה", o: true },
+          { t: "מטלית אישית", o: true },
+          { t: "פלאסק לאלכוהול + משפך", o: true }
+        ]},
+        { sub: "אופניים", items: [
+          { t: "אופניים + סל + לדים + רגלית רחבה (כדור טניס) + ריפוד", o: true },
+          { t: "מנעול", o: true },
+          { t: "ציוד לתיקון, שמן", o: true }
+        ]}
+      ]
+    },
+    {
+      category: "שימושי",
+      about: "דברים שחשוב שיהיו באוהל",
+      groups: [
+        { sub: "", items: [
+          { t: "אולר", o: true },
+          { t: "(למתנדבים) שעון / שעון מעורר", o: true },
+          "מצית",
+          { t: "פנקס ועט" },
+          "שקיות אטומות למים ולאבק (זיפלוק)"
+        ]},
+        { sub: "אלקטרוניקה", items: [
+          "סלולרי / מצלמה / נגן מוזיקה",
+          "מטען + עוד סוללה + כרטיס זיכרון + תיק + כיסוי נגד אבק",
+          { t: "מעביר משקע באוטו לשקע USB (עדיף כפול)", o: true },
+          { t: "רמקולים קטנים + סוללות + מטען", o: true }
+        ]},
+        { sub: "פאן", items: [
+          { t: "צעצועים ומשחקים", o: true },
+          "שפריצר / מניפה / מאוורר אישי",
+          { t: "קרם לעיסוי", o: true },
+          { t: "ספר / טאבלט + סרטים (כשרוצים הפסקה)", o: true },
+          { t: "(לכשרונות) כלי נגינה, כלי אש, כלי CRAFT, כלי אמנות, מיטת טיפולים" }
+        ]}
+      ]
+    },
+    {
+      category: "תרופות",
+      about: "לחירום ולנוחות יומיומית",
+      groups: [
+        { sub: "בסיס", items: [
+          "תרופות מרשם קבועות / שהשתמשתי בהן לאחרונה",
+          "תרופות חירום",
+          "קונדומים, חומר סיכה",
+          "ערכת עזרה ראשונה"
+        ]},
+        { sub: "טיפוח והגנה", items: [
+          "קרם הגנה מהשמש",
+          "אלתוש",
+          "קרם לחות, שפתון נגד יובש",
+          { t: "טלק", o: true },
+          { t: "קרם נגד פטריות", o: true },
+          "קרם שפשפות",
+          { t: "אלוורה" },
+          "טיפות עיניים",
+          { t: "(לעובדים) לויקופלסט חבישה לידיים", o: true }
+        ]}
+      ]
+    },
+    {
+      category: "טואלט",
+      about: "שירותים, מקלחת והיגיינה",
+      groups: [
+        { sub: "", items: [
+          "תיק רחצה",
+          { t: "(לבעלי שיער) מברשת לשיער", o: true }
+        ]},
+        { sub: "שירותים", items: [
+          { t: "נייר טואלט", o: true },
+          "אלכוג׳ל"
+        ]},
+        { sub: "מקלחת", items: [
+          { t: "מגבת" },
+          "שמפו"
+        ]},
+        { sub: "היגיינה", items: [
+          { t: "דאודורנט" },
+          "מברשת + משחת שיניים",
+          "(לבנות) טמפונים / פדים / גלולות",
+          "(לחודש) ערכת גילוח",
+          "(לחודש) קוצץ ציפורניים"
+        ]}
+      ]
+    },
+    {
+      category: "מחנה",
+      about: "אוהל, שקש, וכל מה שמרכיב את האזור שלכם",
+      groups: [
+        { sub: "שינה", items: [
+          "מזרון",
+          "סדין",
+          "כרית + ציפית",
+          "שמיכת פליז",
+          { t: "שק שינה / סדין + שמיכות + מצעים להחלפה", o: true },
+          { t: "בסיס מיטה? רפידת מזרן? ראש מיטה?", o: true },
+          { t: "כריות לשינה", o: true },
+          "מסכה לעיניים",
+          { t: "כיסוי מיטה (נגד אבק)", o: true }
+        ]},
+        { sub: "מבנה", items: [
+          "אוהל",
+          { t: "ערכת תיקונים לאוהל", o: true },
+          { t: "יתדות אוהל + כיסוי ליתדות (כדור טניס/בקבוק) + פטיש", o: true },
+          { t: "חבלים לאוהל", o: true },
+          { t: "סימון זוהר לחבלים", o: true },
+          { t: "מגרפה להכנת השטח", o: true },
+          { t: "(מתחת) מחצלת / ברזנט", o: true },
+          "(ליד) שטיח כניסה לאוהל / דשא — נגד קוצים ולאזור הנעליים",
+          { t: "קישוטים / סימונים לאוהל ולסביבה שלו" },
+          { t: "שלט / דגל / מגדלור / בלון", o: true },
+          { t: "צל מעל האוהל / כיסוי / מחזירי שמש", o: true }
+        ]},
+        { sub: "תאורה", items: [
+          { t: "תאורה למטבח / עבודה / אכילה — שטח גדול, ניידת", o: true },
+          { t: "תאורה לאוהל ולשינה" },
+          { t: "תאורה לבחוץ — קישוט", o: true },
+          { t: "סוללות + מטען" }
+        ]},
+        { sub: "ניקיון", items: [
+          { t: "מטאטא ויעה קטנים / שואב אבק / דוחף אבק (המשאבה של המזרון)", o: true },
+          { t: "פח אשפה קטן", o: true }
+        ]},
+        { sub: "אחסון", items: [
+          { t: "ארגזים/קופסאות לבגדים/ציוד/אוכל/כלי מיטה/טואלט — מוגנות מאבק", o: true },
+          { t: "לבגדים: ארון, מתלה קולבים", o: true },
+          { t: "ארגונית תלויה, מגירות פלסטיק, מדפי קרטון", o: true },
+          { t: "קופסאות לאוכל באוהל (ממתקים וכו׳)", o: true },
+          { t: "ליד המיטה: שידה, צידנית קטנה לשתייה", o: true },
+          { t: "צידנית לטואלט", o: true },
+          "קופסת אקססוריז",
+          { t: "סל כביסה / אזור לבגדים מאובקים", o: true }
+        ]},
+        { sub: "שדרוג אוהל", items: [
+          { t: "מאוורר / מזגן", o: true },
+          { t: "רמקולים ומוזיקה", o: true },
+          { t: "חשמל: סוללה / סולארי / כבל מאריך + מפצל", o: true },
+          { t: "(בפנים) שטיח / רצפת ספוגים / דשא מלאכותי", o: true },
+          { t: "אזור להתכרבלות, פופים, כריות ישיבה", o: true },
+          { t: "שולחן", o: true },
+          { t: "ספסל מיטה", o: true },
+          { t: "כיור אישי לבוקר", o: true },
+          { t: "מראה", o: true },
+          { t: "גיגית לשטיפת רגליים בכניסה לאוהל", o: true },
+          { t: "קישוטים בתוך האוהל", o: true },
+          { t: "כף נגד זבובים", o: true }
+        ]},
+        { sub: "זולה בחוץ", items: [
+          { t: "מחצלת", o: true },
+          { t: "ערסל", o: true },
+          { t: "ציליה + מוטות", o: true },
+          { t: "כיסא מתקפל / כרית ישיבה", o: true },
+          { t: "שמיכה שאפשר ללכלך", o: true },
+          { t: "הגזמה! מקרן / טרמפולינה / בריכת כדורים", o: true }
+        ]},
+        { sub: "שונות", items: [
+          { t: "שירותים — בקבוק לילה / כיסא ליום", o: true },
+          { t: "מקלחת סולרית / שפריצר", o: true },
+          { t: "(לחודש) חבל ייבוש כביסה", o: true },
+          { t: "לוח להודעות + טושים", o: true }
+        ]}
+      ]
+    },
+    {
+      category: "מטבח",
+      about: "לבישולים",
+      groups: [
+        { sub: "", items: [
+          { t: "ג׳ריקנים / בקבוקי מים לאוהל + משפך", o: true },
+          { t: "כיריים גז / גזייה", o: true },
+          { t: "בלוני גז", o: true },
+          { t: "צידנית לקירור / שמיכה טרמית / קרח יבש", o: true },
+          { t: "מיכל לקרח בתוך הצידנית", o: true },
+          { t: "קופסאות פלסטיק לאחסון אוכל או לחימום חוזר", o: true },
+          { t: "סיר / פינג׳אן / קומקום / מחבת", o: true },
+          { t: "קרש חיתוך + סכיני חיתוך", o: true },
+          { t: "(להגזמה) בלנדר לשייקים ומרגריטות", o: true }
+        ]},
+        { sub: "לנקות", items: [
+          { t: "מיכלים למים אפורים (+ 1% אקונומיקה)", o: true },
+          { t: "שקיות אשפה גדולות ועבות", o: true },
+          { t: "נייר מגבת", o: true },
+          { t: "סקוץ׳ + סבון כלים", o: true }
+        ]},
+        { sub: "תבלינים", items: [
+          { t: "ליין חם: קינמון, ציפורן, מוסקט, פלפל אנגלי, אניס, ג׳ינג׳ר, דבש", o: true },
+          { t: "לאוכל: מלח, פלפל, אבקת שום, חרדל, רוטב סרירצ׳ה", o: true },
+          { t: "שמן", o: true }
+        ]}
+      ]
+    },
+    {
+      category: "ביגוד",
+      about: "לשים על הבטן",
+      tips: [
+        "את הבגדים של הדיפולט תשאירו בדיפולט — הביתה תבואו יפים!",
+        "רוב המידברן לובשים אותם בגדים, ורק התלבושות המגניבות מתחלפות. אין צורך ביותר ממשהו אחד מכל סוג."
+      ],
+      groups: [
+        { sub: "", items: [
+          { t: "נעליים למדבר + גרביים + שרוכים במצב טוב" },
+          "נעליים למחנה: כפכפים / סנדלים",
+          "תחתונים",
+          "חגורה"
+        ]},
+        { sub: "לחום", items: [
+          "כובע לשמש / בנדנה",
+          "חולצות קצרות",
+          "מכנסיים קרירים"
+        ]},
+        { sub: "מיוחד", items: [
+          "בגדים נקיים ארוזים לדרך חזור",
+          { t: "פיג׳מה", o: true },
+          "בגד ים"
+        ]},
+        { sub: "תלבושות", items: [
+          "איפור / צבעי גוף",
+          "שמלות / חצאיות / שרוואלים / קילט",
+          "כובעים מגניבים / בנדנות",
+          "גלימות / יריעות סרונג",
+          "שכמיות / ז׳קט",
+          "תכשיטים / אקססוריז / מקל הליכה",
+          "שמשייה אישית",
+          "תלבושות מגניבות ליום וללילה",
+          "טוטו",
+          "וואנזי (עם פתח לשירותים)",
+          "תלבושות ללילה: EL Wire, לדים"
+        ]},
+        { sub: "לקור", items: [
+          "פליז / מעיל / big playa coat / שמיכה",
+          "חולצות חמות",
+          "מכנסיים חמים (טרנינג)",
+          "גטקעס / טייץ",
+          "כובע חם (צמר, עם אוזניים)",
+          { t: "כפפות", o: true },
+          { t: "גרביים חמות", o: true },
+          { t: "בגדים לגשם", o: true }
+        ]}
+      ]
+    },
+    {
+      category: "בנייה",
+      about: "למי שמתכנן להקים, לבנות או לתקן משהו",
+      groups: [
+        { sub: "שימושי", items: [
+          { t: "איזולירבנד / דבק מהיר / דבק לבדים E6000 / דבק חם", o: true },
+          { t: "אזיקונים, חבלים, סיכות ביטחון, חוט מתכת, גומיות", o: true },
+          { t: "(לתופרים) ערכת תפירה ותיקונים לתחפושות, בדים", o: true },
+          { t: "(למייקרים) ערכת תיקונים לאלקטרוניקה", o: true }
+        ]},
+        { sub: "ביגוד", items: [
+          { t: "נעלי עבודה סגורות + גרביים (1–3 ליום)", o: true },
+          { t: "כובע רחב לשמש + קשירה", o: true },
+          { t: "חולצת עבודה (שאפשר להרוס)", o: true },
+          { t: "מכנס עבודה ארוך / דגמ״ח / קילט", o: true },
+          { t: "ברכיות", o: true }
+        ]},
+        { sub: "ציוד מגן", items: [
+          { t: "כפפות עבודה", o: true },
+          { t: "מסכת אבק", o: true },
+          { t: "מגני עיניים", o: true }
+        ]},
+        { sub: "כלים כבדים", items: [
+          { t: "לדרמן + תיק", o: true },
+          { t: "מקדחה + מקדחים, מברגה + ביטים", o: true },
+          { t: "מסור ג׳יגסו / פנדל / דיסק", o: true },
+          { t: "פטיש, פלאייר", o: true },
+          { t: "מטר, פלס", o: true }
+        ]}
+      ]
+    },
+    {
+      category: "גיפטינג",
+      about: "דוגמה לאיך הופכים רעיון לגיפטינג — תפוחים מסוכרים",
+      groups: [
+        { sub: "", items: [
+          { t: "מבער + פקק", o: true },
+          { t: "תפוחים", o: true },
+          { t: "סוכר", o: true }
+        ]}
+      ]
+    }
+  ],
+
+  /* --- לא להביא --- */
+  nopeTitle: "לא להביא",
+  nope: [
+    "צמחים חיים או מתים, וכל דבר שעלול להישבר או לעוף ברוח",
+    "חומרי נפץ, פצצות תאורה, זיקוקים או רקטות",
+    "כלי נשק מכל סוג, כולל רובי אוויר או פיינטבול",
+    "מיכלי בנזין, גנרטורים מונעי בנזין או כיריים בנזין (״בנזינייה״)",
+    "טרקטורונים או קטנועים",
+    "אופנועים שאינם כלי התחבורה ששימש להגעה למקום",
+    "כלבים או בעלי חיים אחרים",
+    "בקבוקי זכוכית — נוטים להתנפץ בקלות",
+    "נצנצים, נוצות, קלקר, שקיות פלסטיק, קונפטי, כוסות חד־פעמיות וכל דבר שעלול לעוף ברוח וליצור זבל"
+  ],
+
+  /* --- שקיפות: כסף ---
+     כל הסכומים בשקלים, מספרים בלבד (בלי ₪ ובלי פסיקים — הדף מוסיף אותם) */
+  money: {
+    updated: "11.10.2026",
+    members: 25,          /* מספר חברי הקאמפ — משמש לחישוב "כמה עוד לכל אחד" */
+
+    /* הכנסות שנכנסו בפועל */
+    income: [
+      { label: "פעימה ראשונה — 1,000 ₪ מכל חבר קאמפ", amount: 25000 }
+    ],
+
+    /* התקציב המתוכנן — סעיף בכל שורה */
+    budget: [
+      { label: "אוכל",                   amount: 7500 },
+      { label: "צילייה",                 amount: 7000 },
+      { label: "אלכוהול",                amount: 7000 },
+      { label: "ארט",                    amount: 3000 },
+      { label: "מים",                    amount: 3000 },
+      { label: "חשמל",                   amount: 3000 },
+      { label: "תפוח",                   amount: 2100 },
+      { label: "בר בנייה",               amount: 2000 },
+      { label: "רצפה",                   amount: 2000 },
+      { label: "אגורה שחוקה ליום שחור",  amount: 2000 },
+      { label: "שירותים",                amount: 1800 },
+      { label: "מקרר",                   amount: 1600 },
+      { label: "מים אפורים",             amount: 1200 },
+      { label: "פוטון זוגי",             amount: 1200 },
+      { label: "מטבח — ציוד ניקיון",     amount: 1000 },
+      { label: "קרח",                    amount: 1000 },
+      { label: "גז",                     amount: 1000 },
+      { label: "דלק הובלה",              amount: 1000 },
+      { label: "קיר",                    amount: 840 },
+      { label: "הובלה ספק",              amount: 750 },
+      { label: "עצים",                   amount: 700 },
+      { label: "מקפיא",                  amount: 600 },
+      { label: "שולחן",                  amount: 300 },
+      { label: "שולחנות עבודה",          amount: 250 },
+      { label: "הקמות — דלק לגנרטור",    amount: 200 },
+      { label: "מקלחות",                 amount: 0 },
+      { label: "חשלש",                   amount: 0 },
+      { label: "בטיחות",                 amount: 0 }
+    ],
+
+    /* הוצאות שכבר שולמו בפועל — מתמלא תוך כדי.
+       פורמט: { date: "28.09", what: "מה נקנה", cat: "סעיף בתקציב", amount: 3200, who: "מי שילם" } */
+    log: []
+  },
+
+  /* --- התארגנות אלכוהול --- */
+  booze: {
+    deadline: "למלא עד ה־17.10",
+    lede: "מזמינים ביחד — יוצא זול יותר לכולם. ממלאים בטבלה מה רוצים, ואנחנו מזמינים במכה אחת.",
+    url: "https://docs.google.com/spreadsheets/d/1BS8lZUkWAdzm_xaztjjsKgRJ3Y1i74V_TSWG-iTbq7w/edit?usp=sharing",
+    linkLabel: "למילוי הטבלה",
+    steps: [
+      "פותחים את הטבלה בקישור למעלה.",
+      "מוסיפים שורה חדשה עם השם שלכם.",
+      "מוסיפים במספר — כמה רוצים מכל דבר.",
+      "הטבלה תחשב כמה זה עולה לכם."
+    ]
+  },
+
+  /* --- לוח המשמרות --- */
+  shifts: [
+    {
+      day: "יום ראשון",
+      note: "הקמה",
+      list: [
+        { time: "08:00–12:00", role: "הקמת אוהל ראשי", who: "צוות בנייה · 6 אנשים" },
+        { time: "12:00–16:00", role: "מטבח והקמת בר",  who: "צוות מטבח · 4 אנשים" },
+        { time: "16:00–20:00", role: "חיבור חשמל ואור", who: "צוות טכני · 3 אנשים" }
+      ]
+    },
+    {
+      day: "יום שני",
+      note: "פתיחה",
+      list: [
+        { time: "10:00–14:00", role: "שער וקבלת אורחים", who: "2 אנשים" },
+        { time: "14:00–18:00", role: "בר",               who: "3 אנשים" },
+        { time: "18:00–22:00", role: "מטבח — ארוחת ערב", who: "4 אנשים" },
+        { time: "22:00–02:00", role: "בר ערב",            who: "3 אנשים" }
+      ]
+    },
+    {
+      day: "יום שלישי",
+      note: "",
+      list: [
+        { time: "08:00–12:00", role: "ניקיון ותחזוקה", who: "4 אנשים" },
+        { time: "12:00–16:00", role: "בר",             who: "3 אנשים" },
+        { time: "16:00–20:00", role: "מטבח",            who: "4 אנשים" },
+        { time: "20:00–24:00", role: "שער",             who: "2 אנשים" }
+      ]
+    },
+    {
+      day: "יום רביעי",
+      note: "",
+      list: [
+        { time: "08:00–12:00", role: "מים ואספקה", who: "2 אנשים" },
+        { time: "12:00–16:00", role: "בר",         who: "3 אנשים" },
+        { time: "16:00–20:00", role: "מטבח",       who: "4 אנשים" },
+        { time: "20:00–24:00", role: "ניקיון",     who: "3 אנשים" }
+      ]
+    },
+    {
+      day: "יום חמישי",
+      note: "פירוק",
+      list: [
+        { time: "09:00–13:00", role: "פירוק בר ומטבח", who: "כל הקאמפ" },
+        { time: "13:00–17:00", role: "פירוק אוהלים",   who: "כל הקאמפ" },
+        { time: "17:00–19:00", role: "סריקת שטח",      who: "צוות סגירה · 5 אנשים" }
+      ]
+    }
+  ],
+
+  footer: ""
+};
+
+/* ==========================================================================
+   מכאן והלאה — המנגנון.
+   ========================================================================== */
+const STORE_KEY = "camp.gear.v3";
+const OPT_KEY   = "camp.showOptional.v1";
+const CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="#FBF3E2" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.8l5 5.2L19.5 6"/></svg>';
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* ---------- אחסון מקומי (עמיד לדפדפן שחוסם) ---------- */
+function readStore(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw === null ? fallback : JSON.parse(raw);
+  } catch (e) {
+    return fallback;
+  }
+}
+function writeStore(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) { /* מצב פרטי או אחסון חסום — הדף ממשיך לעבוד */ }
+}
+
+let checked = new Set(readStore(STORE_KEY, []));
+let showOptional = readStore(OPT_KEY, false) === true;
+
+/* ---------- טקסטים מה-CONFIG ---------- */
+document.getElementById("brandName").textContent   = CONFIG.campName;
+document.getElementById("drawerName").textContent  = CONFIG.campName;
+document.getElementById("drawerDates").textContent = CONFIG.dates;
+document.getElementById("homeTitle").textContent   = CONFIG.campName;
+document.getElementById("homeLede").textContent    = CONFIG.welcome;
+document.getElementById("footNote").textContent    = CONFIG.footer;
+document.getElementById("footNote").hidden         = !CONFIG.footer;
+document.getElementById("nopeTitle").textContent   = CONFIG.nopeTitle;
+document.getElementById("whereQ").textContent      = CONFIG.where.q;
+document.getElementById("whereA").textContent      = CONFIG.where.a;
+
+document.getElementById("homeFacts").innerHTML = CONFIG.facts
+  .map((f) => `<div><dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd></div>`)
+  .join("");
+
+document.getElementById("gearLink").innerHTML = CONFIG.gearLink.url
+  ? `<a class="biglink" href="${esc(CONFIG.gearLink.url)}" target="_blank" rel="noopener">${esc(CONFIG.gearLink.label)}<small>נפתח בטאב חדש</small></a>`
+  : "";
+
+document.getElementById("gearTips").innerHTML = CONFIG.gearTips
+  .map((t) => `<p class="tip">${esc(t)}</p>`)
+  .join("");
+
+document.getElementById("nopeList").innerHTML = CONFIG.nope
+  .map((t) => `<li>${esc(t)}</li>`)
+  .join("");
+
+/* ---------- בניית רשימת הציוד ---------- */
+const norm = (it) => (typeof it === "string" ? { t: it, n: "", o: false } : { t: it.t, n: it.n || "", o: it.o === true });
+let countOptional = 0;
+
+document.getElementById("gearCats").innerHTML = CONFIG.gear
+  .map((cat, ci) => {
+    const tips = (cat.tips || []).map((t) => `<p class="tip">${esc(t)}</p>`).join("");
+
+    const groups = cat.groups
+      .map((g, gi) => {
+        const rows = g.items
+          .map((raw, ii) => {
+            const it = norm(raw);
+            if (it.o) countOptional++;
+            const id = `c${ci}-${gi}-${ii}`;
+            return `<li data-opt="${it.o ? 1 : 0}"><label class="item">
+              <input type="checkbox" data-id="${id}"${checked.has(id) ? " checked" : ""}>
+              <span class="stamp">${CHECK_SVG}</span>
+              <span class="item-text">${esc(it.t)}${it.o ? '<span class="opt-tag">אופציונלי</span>' : ""}${
+                it.n ? `<span class="item-note">${esc(it.n)}</span>` : ""
+              }</span>
+            </label></li>`;
+          })
+          .join("");
+        return `<div class="sub">${g.sub ? `<p class="sub-label">${esc(g.sub)}</p>` : ""}<ul class="items">${rows}</ul></div>`;
+      })
+      .join("");
+
+    return `<section class="cat" id="cat-${ci}">
+      <div class="cat-head">
+        <h2>${esc(cat.category)}</h2>
+        <span class="of"></span>
+      </div>
+      <p class="cat-about">${esc(cat.about)}</p>
+      ${tips}
+      ${groups}
+    </section>`;
+  })
+  .join("");
+
+/* אינדקס הקטגוריות */
+document.getElementById("catIndex").innerHTML = CONFIG.gear
+  .map((cat, ci) => `<a href="#cat-${ci}" data-cat="${ci}">${esc(cat.category)} <em data-chip="${ci}"></em></a>`)
+  .join("");
+
+document.getElementById("optCount").textContent = "עוד " + countOptional + " פריטים שסומנו ברשימה המקורית כלא־נחוצים";
+
+/* ---------- עדכון תצוגה וספירה ---------- */
+const optToggle = document.getElementById("optToggle");
+const barEl     = document.getElementById("gearBar");
+const doneEl    = document.getElementById("gearDone");
+const totalEl   = document.getElementById("gearTotal");
+
+optToggle.checked = showOptional;
+
+function refresh() {
+  let total = 0;
+  let done = 0;
+
+  document.querySelectorAll("#gearCats .cat").forEach((cat, ci) => {
+    let catTotal = 0;
+    let catDone = 0;
+
+    cat.querySelectorAll(".sub").forEach((sub) => {
+      let visibleInSub = 0;
+
+      sub.querySelectorAll("li").forEach((li) => {
+        const isOpt = li.dataset.opt === "1";
+        const hide = isOpt && !showOptional;
+        li.hidden = hide;
+        if (hide) return;
+
+        visibleInSub++;
+        catTotal++;
+        if (li.querySelector("input").checked) catDone++;
+      });
+
+      sub.hidden = visibleInSub === 0;
+    });
+
+    cat.hidden = catTotal === 0;
+    cat.querySelector(".of").textContent = catTotal ? catDone + "/" + catTotal : "";
+
+    const chip = document.querySelector(`#catIndex [data-chip="${ci}"]`);
+    const chipLink = document.querySelector(`#catIndex [data-cat="${ci}"]`);
+    if (chip) chip.textContent = catTotal ? catDone + "/" + catTotal : "";
+    if (chipLink) chipLink.hidden = catTotal === 0;
+
+    total += catTotal;
+    done += catDone;
+  });
+
+  doneEl.textContent = done;
+  totalEl.textContent = total;
+  barEl.style.width = total ? (done / total) * 100 + "%" : "0%";
+}
+
+document.getElementById("gearCats").addEventListener("change", (e) => {
+  const box = e.target.closest('input[type="checkbox"]');
+  if (!box) return;
+  box.checked ? checked.add(box.dataset.id) : checked.delete(box.dataset.id);
+  writeStore(STORE_KEY, [...checked]);
+  refresh();
+});
+
+optToggle.addEventListener("change", () => {
+  showOptional = optToggle.checked;
+  writeStore(OPT_KEY, showOptional);
+  refresh();
+});
+
+document.getElementById("clearBtn").addEventListener("click", () => {
+  if (!confirm("לנקות את כל הסימונים ברשימת הציוד?")) return;
+  document.querySelectorAll('#gearCats input[type="checkbox"]').forEach((b) => { b.checked = false; });
+  checked = new Set();
+  writeStore(STORE_KEY, []);
+  refresh();
+});
+
+refresh();
+
+/* ---------- עמוד השקיפות ---------- */
+const M = CONFIG.money;
+const ils = (n) => n.toLocaleString("he-IL") + " \u20AA";
+const sum = (arr) => arr.reduce((t, r) => t + r.amount, 0);
+
+const totalIn     = sum(M.income);
+const totalBudget = sum(M.budget);
+const gap         = totalBudget - totalIn;   /* כמה עוד חסר מול התקציב */
+const covered     = totalBudget ? Math.round((totalIn / totalBudget) * 100) : 0;
+const perMember   = M.members ? Math.ceil(gap / M.members) : 0;
+
+document.getElementById("moneyUpdated").textContent = "עודכן לאחרונה: " + M.updated;
+
+document.getElementById("moneyTiles").innerHTML = `
+  <div class="tile inc"><dt>נכנס</dt><dd>${ils(totalIn)}</dd></div>
+  <div class="tile out"><dt>תקציב</dt><dd>${ils(totalBudget)}</dd></div>
+  <div class="tile bal wide ${gap > 0 ? "minus" : "plus"}">
+    <dt>${gap > 0 ? "עוד חסר" : "מעל התקציב"}</dt>
+    <dd>${ils(Math.abs(gap))}</dd>
+    <span class="state">${covered}% מהתקציב מכוסה</span>
+    ${gap > 0 && perMember ? `<span class="per">כ־${ils(perMember)} לכל חבר קאמפ (${M.members} חברים)</span>` : ""}
+  </div>`;
+
+/* הכנסות */
+document.getElementById("incomeSum").textContent = ils(totalIn);
+document.getElementById("incomeRows").innerHTML = M.income.length
+  ? M.income.map((r) => `<li><b>${esc(r.label)}</b><span>${ils(r.amount)}</span></li>`).join("")
+  : '<li class="empty">עוד לא נרשמו הכנסות.</li>';
+
+/* התקציב — עמודה אחת לכל סעיף, מהגדול לקטן, בצבע אחד */
+const budgetSorted = [...M.budget].sort((a, b) => b.amount - a.amount);
+const biggest = budgetSorted.length ? budgetSorted[0].amount : 0;
+
+document.getElementById("spendSum").textContent = ils(totalBudget);
+document.getElementById("spendBars").innerHTML = budgetSorted
+  .map((r) => {
+    const share = totalBudget ? Math.round((r.amount / totalBudget) * 100) : 0;
+    const width = biggest ? (r.amount / biggest) * 100 : 0;
+    return `<div class="brow">
+      <div class="brow-top">
+        <span class="brow-label">${esc(r.label)}</span>
+        <span class="brow-val"><b>${ils(r.amount)}</b><em>${share}%</em></span>
+      </div>
+      <div class="btrack"><i style="width:${width}%"></i></div>
+    </div>`;
+  })
+  .join("");
+
+/* הוצאות בפועל */
+const totalPaid = sum(M.log);
+document.getElementById("logCount").textContent = M.log.length ? ils(totalPaid) : "";
+document.getElementById("spendLog").innerHTML = M.log.length
+  ? M.log
+      .map((r) => `<li>
+        <span class="what">${esc(r.what)}</span>
+        <span class="amt">${ils(r.amount)}</span>
+        <span class="meta">${esc(r.date)} \u00B7 <i>${esc(r.cat)}</i> \u00B7 שילם: ${esc(r.who)}</span>
+      </li>`)
+      .join("")
+  : '<li class="empty">עוד לא נרשמו הוצאות בפועל.</li>';
+
+/* ---------- עמוד האלכוהול ---------- */
+const B = CONFIG.booze;
+document.getElementById("boozeDeadline").textContent = B.deadline;
+document.getElementById("boozeLede").textContent     = B.lede;
+document.getElementById("homeBoozeSub").textContent  = B.deadline;
+
+document.getElementById("boozeLink").innerHTML = B.url
+  ? `<a class="biglink" href="${esc(B.url)}" target="_blank" rel="noopener">${esc(B.linkLabel)}<small>נפתח בטאב חדש</small></a>`
+  : '<p class="empty">הקישור לטבלה יתווסף כאן.</p>';
+
+document.getElementById("boozeSteps").innerHTML = B.steps
+  .map((s) => `<li><span>${esc(s)}</span></li>`)
+  .join("");
+
+/* ---------- בניית לוח המשמרות ---------- */
+document.getElementById("shiftDays").innerHTML = CONFIG.shifts
+  .map((d) => {
+    const rows = d.list
+      .map((s) => `<li>
+        <span class="time">${esc(s.time)}</span>
+        <span class="role">${esc(s.role)}</span>
+        <span class="who">${esc(s.who)}</span>
+      </li>`)
+      .join("");
+    return `<section class="day">
+      <div class="day-head"><b>${esc(d.day)}</b>${d.note ? `<small>${esc(d.note)}</small>` : ""}</div>
+      <ul class="shifts">${rows}</ul>
+    </section>`;
+  })
+  .join("");
+
+/* ---------- תפריט ההמבורגר ---------- */
+const burger = document.getElementById("burger");
+const drawer = document.getElementById("drawer");
+const scrim  = document.getElementById("scrim");
+
+function setDrawer(open) {
+  drawer.classList.toggle("open", open);
+  scrim.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", String(open));
+  burger.setAttribute("aria-label", open ? "סגירת תפריט" : "פתיחת תפריט");
+  if (open) drawer.querySelector(".nav a").focus();
+}
+
+burger.addEventListener("click", () => setDrawer(!drawer.classList.contains("open")));
+scrim.addEventListener("click", () => setDrawer(false));
+
+/* ---------- מפה במסך מלא ---------- */
+const mapBtn   = document.getElementById("mapBtn");
+const lightbox = document.getElementById("lightbox");
+const lbClose  = document.getElementById("lbClose");
+
+const lbScroll = document.getElementById("lbScroll");
+const lbImg    = document.getElementById("lbImg");
+const zoomIn   = document.getElementById("zoomIn");
+const zoomOut  = document.getElementById("zoomOut");
+const MAP_W = 9449, MAP_H = 4252;
+let zoom = 0;
+
+/* רוחב בו כל המפה נכנסת למסך */
+function fitWidth() {
+  return Math.min(lbScroll.clientWidth, lbScroll.clientHeight * MAP_W / MAP_H);
+}
+/* קובע רוחב ושומר על אותה נקודה (fx,fy בין 0 ל-1) במרכז המסך */
+function setZoom(w, fx, fy) {
+  w = Math.max(fitWidth(), Math.min(MAP_W, w));
+  lbImg.style.width = w + "px";
+  const h = w * MAP_H / MAP_W;
+  lbScroll.scrollLeft = fx * w - lbScroll.clientWidth / 2;
+  lbScroll.scrollTop  = fy * h - lbScroll.clientHeight / 2;
+  zoom = w;
+  zoomIn.disabled  = w >= MAP_W - 1;
+  zoomOut.disabled = w <= fitWidth() + 1;
+}
+function centerNow() {
+  const w = zoom, h = w * MAP_H / MAP_W;
+  return [
+    (lbScroll.scrollLeft + lbScroll.clientWidth / 2) / w,
+    Math.min(1, (lbScroll.scrollTop + lbScroll.clientHeight / 2) / h),
+  ];
+}
+zoomIn.addEventListener("click", () => setZoom(zoom * 1.6, ...centerNow()));
+zoomOut.addEventListener("click", () => setZoom(zoom / 1.6, ...centerNow()));
+document.getElementById("zoomAll").addEventListener("click", () => setZoom(0, .5, .5));
+
+function openMap() {
+  lightbox.hidden = false;
+  /* פותחים מוגדל על הקאמפ — העיגול הצהוב במרכז המסך */
+  setZoom(Math.max(fitWidth() * 3, 3200), 0.666, 0.332);
+  lbClose.focus();
+}
+function closeMap() {
+  lightbox.hidden = true;
+  mapBtn.focus();
+}
+
+mapBtn.addEventListener("click", openMap);
+lbClose.addEventListener("click", closeMap);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  if (!lightbox.hidden) closeMap();
+  else if (drawer.classList.contains("open")) {
+    setDrawer(false);
+    burger.focus();
+  }
+});
+
+/* ---------- ניווט בין הדפים ---------- */
+const ROUTES = ["home", "gear", "shifts", "money", "booze"];
+
+function showPage(route) {
+  ROUTES.forEach((r) => {
+    document.getElementById("page-" + r).hidden = r !== route;
+  });
+  document.querySelectorAll(".nav a").forEach((a) => {
+    if (a.dataset.route === route) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
+  });
+}
+
+function go() {
+  const hash = location.hash;
+  setDrawer(false);
+
+  /* קפיצה לקטגוריה — נשארים בדף הציוד (וגם אם נכנסו ישירות לקישור כזה) */
+  if (/^#cat-\d+$/.test(hash)) {
+    showPage("gear");
+    const target = document.getElementById(hash.slice(1));
+    if (target) target.scrollIntoView();
+    return;
+  }
+
+  showPage(ROUTES.includes(hash.replace("#/", "")) ? hash.replace("#/", "") : "home");
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener("hashchange", go);
+go();
+</script>
+
+</body>
+</html>
