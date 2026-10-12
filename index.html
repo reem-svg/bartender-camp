@@ -252,8 +252,8 @@
   .nav a[aria-current="page"] .tick { background: var(--rust); }
 
   .drawer-foot {
-    margin-top: auto;
-    padding: 16px 18px 22px;
+    margin-top: 14px;
+    padding: 0 18px 22px;
     color: var(--ink-faint);
     font-size: .78rem;
     letter-spacing: .04em;
@@ -1077,10 +1077,53 @@
     font-size: .88rem;
   }
 
+  /* ---------- "עבדים היינו, של יסמין" ---------- */
+  .pyr {
+    position: relative;
+    flex: 0 0 132px;
+    display: grid;
+    place-items: center;
+    margin-top: 2px;
+  }
+  .pyr svg { display: block; width: 100%; height: auto; }
+  .pyr polygon, .pyr rect { stroke: var(--ink); stroke-width: 5; }
+  .pyr-light { fill: #E0B45C; }
+  .pyr-dark  { fill: #B9842C; }
+  .pyr-small { fill: #C79A3C; }
+  .pyr-sand  { fill: #8A6A2E; }
+  .pyr-sun   { fill: var(--rust); stroke: var(--ink); stroke-width: 5; animation: sunpulse 3.6s ease-in-out infinite; transform-origin: 158px 38px; }
+  @keyframes sunpulse {
+    0%, 100% { transform: scale(1);    opacity: 1; }
+    50%      { transform: scale(1.12); opacity: .88; }
+  }
+  .pyr-heat {
+    transform-origin: 100px 158px;
+    animation: heat 5s ease-in-out infinite;
+  }
+  @keyframes heat {
+    0%, 100% { transform: skewX(0deg)    scaleY(1); }
+    50%      { transform: skewX(-1.4deg) scaleY(1.02); }
+  }
+  .pyr-text {
+    position: absolute;
+    top: 56%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-family: var(--f-display);
+    font-size: .6rem;
+    line-height: 1.15;
+    color: #3A2208;
+    transform: rotate(-2deg);
+    pointer-events: none;
+  }
+  .pyr-text b { font-size: .78rem; font-weight: 400; }
+
   /* ---------- "בחסות הצינור של מוטי" (בתפריט) ---------- */
   .pipe {
     position: relative;
-    margin: 30px 16px 0;
+    margin: auto 16px 0;   /* נדחף לתחתית התפריט */
+    padding-top: 30px;
     display: grid;
     place-items: center;
   }
@@ -1530,9 +1573,26 @@
 
   <!-- ========== משמרות ========== -->
   <section class="page" id="page-shifts" hidden>
-    <p class="eyebrow">לוח־זמנים</p>
-    <h1>משמרות</h1>
-    <p class="lede">לוח המשמרות של ברטנדר, לפי יום.</p>
+    <div class="money-head">
+      <div class="money-head-txt">
+        <p class="eyebrow">לוח־זמנים</p>
+        <h1>משמרות</h1>
+        <p class="lede">לוח המשמרות של ברטנדר, לפי יום.</p>
+      </div>
+
+      <div class="pyr" aria-label="עבדים היינו, של יסמין">
+        <svg viewBox="0 0 200 190" role="img" aria-hidden="true">
+          <circle class="pyr-sun" cx="158" cy="38" r="21"/>
+          <g class="pyr-heat">
+            <polygon class="pyr-small"  points="48,78 100,158 -4,158"/>
+            <polygon class="pyr-light"  points="112,44 192,158 112,158"/>
+            <polygon class="pyr-dark"   points="112,44 112,158 32,158"/>
+          </g>
+          <rect class="pyr-sand" x="0" y="155" width="200" height="12" rx="6"/>
+        </svg>
+        <span class="pyr-text">עבדים היינו<b>של יסמין</b></span>
+      </div>
+    </div>
 
     <div id="shiftsLink"></div>
 
