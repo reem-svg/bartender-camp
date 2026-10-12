@@ -384,12 +384,11 @@
   }
   .map-btn:focus-visible { outline: 3px solid var(--mustard); outline-offset: -3px; }
 
-  /* תוכנית הקאמפ — תצוגה מלאה ולא חתוכה */
+  /* תוכנית הקאמפ — ממלאת את המסגרת כמו מפת העיר, ממוקדת באזור המבנים */
   .map-btn.plan img {
     height: 230px;
-    object-fit: contain;
-    object-position: center;
-    padding: 6px 0;
+    object-fit: cover;
+    object-position: center 18%;
   }
 
   /* ---------- מפה במסך מלא ---------- */
