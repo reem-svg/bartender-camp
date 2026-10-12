@@ -384,6 +384,14 @@
   }
   .map-btn:focus-visible { outline: 3px solid var(--mustard); outline-offset: -3px; }
 
+  /* תוכנית הקאמפ — תצוגה מלאה ולא חתוכה */
+  .map-btn.plan img {
+    height: 230px;
+    object-fit: contain;
+    object-position: center;
+    padding: 6px 0;
+  }
+
   /* ---------- מפה במסך מלא ---------- */
   .lightbox {
     position: fixed;
@@ -1522,6 +1530,17 @@
       </button>
     </section>
 
+    <section class="where">
+      <div class="where-top">
+        <p class="where-q">מפת הקאמפ</p>
+        <p class="where-a">19 × 24 מ׳</p>
+      </div>
+      <button type="button" class="map-btn plan" id="planBtn">
+        <img src="camp-plan.png" alt="תוכנית הקאמפ — מטבח, סלונים, בר, מקלחת, שירותים ואזור האוהלים">
+        <span class="map-hint">להגדלה ⤢</span>
+      </button>
+    </section>
+
     <div class="jump">
       <a href="#/gear">
         <strong>רשימת ציוד</strong>
@@ -2611,8 +2630,9 @@ const lbScroll = document.getElementById("lbScroll");
 const lbImg    = document.getElementById("lbImg");
 const zoomIn   = document.getElementById("zoomIn");
 const zoomOut  = document.getElementById("zoomOut");
-const MAP_W = 9449, MAP_H = 4252;
+let MAP_W = 9449, MAP_H = 4252;   /* מתעדכן לפי המפה שנפתחת */
 let zoom = 0;
+let lastMapBtn = null;
 
 /* רוחב בו כל המפה נכנסת למסך */
 function fitWidth() {
@@ -2640,18 +2660,47 @@ zoomIn.addEventListener("click", () => setZoom(zoom * 1.6, ...centerNow()));
 zoomOut.addEventListener("click", () => setZoom(zoom / 1.6, ...centerNow()));
 document.getElementById("zoomAll").addEventListener("click", () => setZoom(0, .5, .5));
 
-function openMap() {
+/* מפה אחת לכל כפתור: מידות, כותרת, ונקודת-הפתיחה */
+const MAPS = {
+  city: {
+    btn: "mapBtn", src: "map-full.png", w: 9449, h: 4252,
+    title: "מפת העיר המלאה", sub: "הקאמפ מסומן בעיגול הצהוב · עדכון 08.10.2026",
+    alt: "מפת העיר המלאה — מיקום הקאמפ מסומן בעיגול צהוב",
+    zoomStart: 3, fx: 0.666, fy: 0.332
+  },
+  plan: {
+    btn: "planBtn", src: "camp-plan.png", w: 1210, h: 1500,
+    title: "מפת הקאמפ", sub: "19 × 24 מ׳ · שטח כולל כ־444 מ״ר",
+    alt: "תוכנית הקאמפ — מטבח, סלונים, בר, מקלחת, שירותים ואזור האוהלים",
+    zoomStart: 0, fx: 0.5, fy: 0.5
+  }
+};
+
+function openMap(m) {
+  MAP_W = m.w;
+  MAP_H = m.h;
+  lastMapBtn = document.getElementById(m.btn);
+
+  lbImg.src = m.src;
+  lbImg.setAttribute("width", m.w);
+  lbImg.setAttribute("height", m.h);
+  lbImg.alt = m.alt;
+  document.getElementById("lbTitle").innerHTML = `${esc(m.title)}<small>${esc(m.sub)}</small>`;
+
   lightbox.hidden = false;
-  /* פותחים מוגדל על הקאמפ — העיגול הצהוב במרכז המסך */
-  setZoom(Math.max(fitWidth() * 3, 3200), 0.666, 0.332);
+  /* zoomStart 0 = כל המפה נכנסת למסך; אחרת פי-כמה מזה, ממורכז על הנקודה */
+  setZoom(m.zoomStart ? Math.max(fitWidth() * m.zoomStart, 3200) : 0, m.fx, m.fy);
   lbClose.focus();
 }
 function closeMap() {
   lightbox.hidden = true;
-  mapBtn.focus();
+  if (lastMapBtn) lastMapBtn.focus();
 }
 
-mapBtn.addEventListener("click", openMap);
+Object.values(MAPS).forEach((m) => {
+  const b = document.getElementById(m.btn);
+  if (b) b.addEventListener("click", () => openMap(m));
+});
 lbClose.addEventListener("click", closeMap);
 
 document.addEventListener("keydown", (e) => {
