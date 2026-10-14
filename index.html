@@ -2171,9 +2171,14 @@ const CONFIG = {
       { label: "בטיחות",                 amount: 0 }
     ],
 
-    /* הוצאות שכבר שולמו בפועל — מתמלא תוך כדי.
-       פורמט: { date: "28.09", what: "מה נקנה", cat: "סעיף בתקציב", amount: 3200, who: "מי שילם" } */
-    log: []
+    /* הוצאות שכבר שולמו בפועל.
+       כל שדה אופציונלי חוץ מ-what ו-amount:
+       { date: "28.09", what: "ספק", cat: "סעיף", amount: 2440, status: "שולם", who: "מי העביר" } */
+    log: [
+      { what: "זהר אירועים", cat: "צילייה, ציוד וקירות", amount: 2440, status: "מקדמה · סה״כ מוסכם 12,540 ₪" },
+      { what: "פאוור און",   cat: "חשמל",                amount: 2130, status: "שולם" },
+      { what: "איי פרש",     cat: "שירותים",             amount: 2360, status: "שולם · 5 פינויים" }
+    ]
   },
 
   /* --- התארגנות אלכוהול --- */
@@ -2559,11 +2564,19 @@ function renderMoney(liveNote) {
   document.getElementById("logCount").textContent = M.log.length ? ils(totalPaid) : "";
   document.getElementById("spendLog").innerHTML = M.log.length
     ? M.log
-        .map((r) => `<li>
+        .map((r) => {
+          const meta = [
+            r.date   ? esc(r.date) : "",
+            r.cat    ? `<i>${esc(r.cat)}</i>` : "",
+            r.status ? esc(r.status) : "",
+            r.who    ? "שילם: " + esc(r.who) : ""
+          ].filter(Boolean).join(" \u00B7 ");
+          return `<li>
           <span class="what">${esc(r.what)}</span>
           <span class="amt">${ils(r.amount)}</span>
-          <span class="meta">${esc(r.date)} \u00B7 <i>${esc(r.cat)}</i> \u00B7 שילם: ${esc(r.who)}</span>
-        </li>`)
+          <span class="meta">${meta}</span>
+        </li>`;
+        })
         .join("")
     : '<li class="empty">עוד לא נרשמו הוצאות בפועל.</li>';
 }
