@@ -1695,6 +1695,8 @@
 
     <dl class="tiles" id="moneyTiles"></dl>
 
+    <div id="moneySheetLink"></div>
+
     <div class="mhead"><h2>מאיפה נכנס</h2><span class="sum" id="incomeSum"></span></div>
     <ul class="rows" id="incomeRows"></ul>
 
@@ -2131,6 +2133,13 @@ const CONFIG = {
        ריק = משתמשים רק במספרים שלמטה. אם מוגדר — הדף מושך מהגיליון ברקע,
        ואם משהו לא תקין הוא נשאר עם המספרים שלמטה. */
     liveUrl: "",
+
+    /* קישור לטבלת השקיפות המלאה — מופיע מתחת לאריחים */
+    sheetLink: {
+      url: "https://docs.google.com/spreadsheets/d/1uILoU-vKsMlbaSoJct4LaCXH_AUZPD_8Lpx_nWwqJEQ/edit?gid=0#gid=0",
+      label: "לטבלת השקיפות המלאה",
+      note: "כל ההכנסות וההוצאות, שורה־שורה"
+    },
     members: 25,          /* מספר חברי הקאמפ — משמש לחישוב "כמה עוד לכל אחד" */
 
     /* הכנסות שנכנסו בפועל */
@@ -2589,6 +2598,10 @@ function renderMoney(liveNote) {
 }
 
 renderMoney();
+
+document.getElementById("moneySheetLink").innerHTML = (M.sheetLink || {}).url
+  ? `<a class="biglink" href="${esc(M.sheetLink.url)}" target="_blank" rel="noopener">${esc(M.sheetLink.label)}<small>${esc(M.sheetLink.note || "נפתח בטאב חדש")}</small></a>`
+  : "";
 
 /* ---------- רענון התקציב מגיליון גוגל (אם הוגדרה כתובת) ----------
    המספרים השמורים נטענים תמיד ומיידית. זה רק מנסה למשוך גרסה טרייה
