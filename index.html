@@ -2127,7 +2127,7 @@ const CONFIG = {
   /* --- שקיפות: כסף ---
      כל הסכומים בשקלים, מספרים בלבד (בלי ₪ ובלי פסיקים — הדף מוסיף אותם) */
   money: {
-    updated: "25.10.2026",
+    updated: "27.10.2026",
 
     /* כתובת CSV של גיליון התקציב ("קובץ ← שיתוף ← פרסום באינטרנט ← CSV").
        ריק = משתמשים רק במספרים שלמטה. אם מוגדר — הדף מושך מהגיליון ברקע,
@@ -2149,6 +2149,7 @@ const CONFIG = {
       { label: "המסיבה",                              amount: 6132 },
       { label: "אוכל למפגש 08.08",                    amount: 658 },
       { label: "אוכל למפגש 10.10",                    amount: 540 },
+      { label: "אוכל למפגש 24.10",                    amount: 300 },
       { label: "אוכל למפגש 13.09",                    amount: 210 },
       { label: "העברה מג׳זבי",                        amount: 12 }
     ],
@@ -2194,7 +2195,16 @@ const CONFIG = {
     /* הוצאות שכבר שולמו בפועל — מתוך "טופס שקיפות", מהחדש לישן.
        { date, what, amount, who } — who = למי הכסף עבר */
     log: [
+      { date: "27.10", what: "אלקטרוליטים",           amount: 180,  who: "ענבל" },
+      { date: "26.10", what: "בירות ויין לבר",        amount: 2065, who: "ראם" },
+      { date: "26.10", what: "אוכל למפגש 24.10",      amount: 300,  who: "עומר" },
+      { date: "26.10", what: "וילון ולדים",           amount: 144,  who: "ליטל" },
+      { date: "25.10", what: "הזמנת אוכל",            amount: 1146, who: "בר ממאן" },
+      { date: "25.10", what: "עצים למדורה",           amount: 765,  who: "עמית" },
+      { date: "25.10", what: "ציוד בר",               amount: 325,  who: "עידו" },
+      { date: "25.10", what: "ארט ותוכן",             amount: 250,  who: "ירדן" },
       { date: "25.10", what: "גריקן, ראצ׳טים ובאלות", amount: 186,  who: "ראם" },
+      { date: "25.10", what: "מאפרות ארט",            amount: 130,  who: "ג׳זבי" },
       { date: "24.10", what: "כיור",                  amount: 480,  who: "מוטי" },
       { date: "24.10", what: "ציוד אומנות",           amount: 160,  who: "עדישי" },
       { date: "22.10", what: "מקסטוק",                amount: 515,  who: "ראם" },
@@ -2279,7 +2289,7 @@ const CONFIG = {
         { time: "13:00–15:00", role: "ניקיון קאמפ וקרח", who: "דן" },
         { time: "17:00", parts: [
           { role: "מוביל ארוחה", who: "עמית" },
-          { role: "סו שף",       who: "עדי" }
+          { role: "סו שף",       who: "הדר" }
         ]},
         { time: "סוף הארוחה",  role: "ניקוי כלים",       who: "יסמין · עידו" },
         { time: "21:00–00:00", role: "בר",               who: "מי שרוצה" }
@@ -2557,21 +2567,27 @@ const sum = (arr) => arr.reduce((t, r) => t + r.amount, 0);
 function renderMoney(liveNote) {
   const totalIn     = sum(M.income);
   const totalBudget = sum(M.budget);
-  const gap         = totalBudget - totalIn;   /* כמה עוד חסר מול התקציב */
+  const totalPaid   = sum(M.log);
+  const cash        = totalIn - totalPaid;     /* כמה כסף יש בקופה ברגע זה */
+  const gap         = totalBudget - totalIn;   /* פער מול התקציב המתוכנן */
   const covered     = totalBudget ? Math.round((totalIn / totalBudget) * 100) : 0;
   const perMember   = M.members ? Math.ceil(gap / M.members) : 0;
 
   document.getElementById("moneyUpdated").textContent =
     liveNote || ("עודכן לאחרונה: " + M.updated);
 
+  const gapLine = gap > 0
+    ? "עוד חסר " + ils(gap) + (perMember ? " (כ־" + ils(perMember) + " לחבר)" : "")
+    : "עודף " + ils(Math.abs(gap));
+
   document.getElementById("moneyTiles").innerHTML = `
     <div class="tile inc"><dt>נכנס</dt><dd>${ils(totalIn)}</dd></div>
-    <div class="tile out"><dt>תקציב</dt><dd>${ils(totalBudget)}</dd></div>
-    <div class="tile bal wide ${gap > 0 ? "minus" : "plus"}">
-      <dt>${gap > 0 ? "עוד חסר" : "עודף"}</dt>
-      <dd>${ils(Math.abs(gap))}</dd>
+    <div class="tile out"><dt>שולם</dt><dd>${ils(totalPaid)}</dd></div>
+    <div class="tile bal wide ${cash >= 0 ? "plus" : "minus"}">
+      <dt>${cash >= 0 ? "יתרה בקופה" : "חריגה"}</dt>
+      <dd>${ils(Math.abs(cash))}</dd>
       <span class="state">${covered}% מהתקציב מכוסה</span>
-      ${gap > 0 && perMember ? `<span class="per">כ־${ils(perMember)} לכל חבר קאמפ (${M.members} חברים)</span>` : ""}
+      <span class="per">תקציב ${ils(totalBudget)} · ${gapLine}</span>
     </div>`;
 
   /* הכנסות */
@@ -2600,7 +2616,6 @@ function renderMoney(liveNote) {
     .join("");
 
   /* הוצאות בפועל */
-  const totalPaid = sum(M.log);
   document.getElementById("logCount").textContent = M.log.length ? ils(totalPaid) : "";
   document.getElementById("spendLog").innerHTML = M.log.length
     ? M.log
